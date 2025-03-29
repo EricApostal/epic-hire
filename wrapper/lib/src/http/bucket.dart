@@ -1,7 +1,6 @@
 import 'package:http/http.dart';
 import 'package:wrapper/src/http/handler.dart';
 import 'package:wrapper/src/http/request.dart';
-import 'package:wrapper/src/http/request.dart';
 
 /// A rate limit bucket tracking requests.
 ///

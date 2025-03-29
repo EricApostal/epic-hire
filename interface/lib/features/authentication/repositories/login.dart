@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 part 'login.g.dart';
 
 @Riverpod(keepAlive: true)
-class Login extends _$Login {
+class Authentication extends _$Authentication {
   @override
   Future<WrapperRest?> build() async {
     return null;
@@ -50,6 +50,10 @@ class Login extends _$Login {
       companyPageIds: body["companyPageIds"],
       accountStatus: body["accountStatus"],
     );
-    return await Wrapper.connectRest("Bearer ${user.token}");
+    return await Wrapper.connectRest(
+      userId: user.id,
+      token: "Bearer ${user.token}",
+      options: RestClientOptions(),
+    );
   }
 }

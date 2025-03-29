@@ -2,7 +2,7 @@ class AuthenticatedUser {
   final String token;
   final String type;
   final String refreshToken;
-  final num id;
+  final int id;
   final String username;
   final String email;
   final String role;

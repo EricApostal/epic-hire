@@ -1,4 +1,5 @@
 import 'package:wrapper/src/cache/cache.dart';
+import 'package:wrapper/src/models/company/company.dart';
 import 'package:wrapper/src/models/user/user.dart';
 import 'package:wrapper/src/plugin/plugin.dart';
 import 'package:logging/logging.dart';
@@ -23,11 +24,15 @@ class RestClientOptions extends ClientOptions {
   /// The [CacheConfig] to use for the cache of the [NyxxRest.users] manager.
   final CacheConfig<User> userCacheConfig;
 
+  /// The [CacheConfig] to use for the cache of the [NyxxRest.companies] manager.
+  final CacheConfig<Company> companyCacheConfig;
+
   /// Create a new [RestClientOptions].
   const RestClientOptions({
     super.plugins,
     super.loggerName,
     this.userCacheConfig = const CacheConfig(),
+    this.companyCacheConfig = const CacheConfig(),
   });
 }
 

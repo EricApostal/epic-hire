@@ -5,7 +5,7 @@ export 'src/api_options.dart'
         GatewayApiOptions,
         GatewayCompression,
         GatewayPayloadFormat;
-export 'src/client.dart' show Wrapper, WrapperRest, WrapperGateway;
+export 'src/client.dart' show Wrapper, WrapperRest;
 export 'src/client_options.dart'
     show ClientOptions, RestClientOptions, GatewayClientOptions;
 export 'src/errors.dart' show InvalidEventException, PluginError;

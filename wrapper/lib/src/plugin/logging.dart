@@ -116,7 +116,7 @@ class Logging extends WrapperPlugin {
   @override
   void beforeConnect(ApiOptions apiOptions, ClientOptions clientOptions) {
     if (apiOptions is RestApiOptions) {
-      _tokens.add(apiOptions.token);
+      if (apiOptions.token != null) _tokens.add(apiOptions.token!);
     }
 
     _clients++;

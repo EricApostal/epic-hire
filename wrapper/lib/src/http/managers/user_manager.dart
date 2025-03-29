@@ -38,9 +38,8 @@ class UserManager extends ReadOnlyManager<User> {
 
   /// Fetch the current user from the API.
   Future<User> fetchCurrentUser() async {
-    // TODO: Don't hard code
-    final route = HttpRoute()..users(id: '20256');
-    final request = BasicRequest(route);
+    final route = HttpRoute()..users(id: client.apiOptions.userId.toString());
+    final request = BasicRequest(route, 2);
 
     final response = await client.httpHandler.executeSafe(request);
     final user = parse(response.jsonBody as Map<String, Object?>);

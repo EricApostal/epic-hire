@@ -13,10 +13,11 @@ abstract class ApiOptions {
   String get baseUri => '';
 
   /// The version of the API to use.
-  int get apiVersion => 2;
+  /// EpicHire isn't consistent on which api to use, so we have to do this on a per-req basis.
+  // int get apiVersion => 2;
 
   /// The value of the `Authorization` header to use when authenticating requests.
-  String get authorizationHeader;
+  String? get authorizationHeader;
 
   /// The value of the `User-Agent` header to send with each request.
   final String userAgent;
@@ -25,9 +26,7 @@ abstract class ApiOptions {
   final String host;
 
   /// The host at which the CDN can be found.
-  ///
-  /// This is always `cdn.rubisco.app`.
-  String get cdnHost => 'cdn.rubisco.app';
+  String get cdnHost => 'IMPLEMENT_ME';
 
   /// Create a new [ApiOptions].
   ApiOptions({this.userAgent = defaultUserAgent, this.host = defaultHost});
@@ -36,13 +35,16 @@ abstract class ApiOptions {
 /// Options for connecting to the Discord API to make HTTP requests with a bot token.
 class RestApiOptions extends ApiOptions {
   /// The token to use.
-  final String token;
+  final String? token;
+
+  /// User id of the user
+  final int? userId;
 
   @override
-  String get authorizationHeader => token;
+  String? get authorizationHeader => token;
 
   /// Create a new [RestApiOptions].
-  RestApiOptions({required this.token, super.userAgent, super.host});
+  RestApiOptions({this.token, this.userId, super.userAgent, super.host});
 }
 
 /// Options for connecting to the Discord API for making HTTP requests and connecting to the Gateway
@@ -68,6 +70,7 @@ class GatewayApiOptions extends RestApiOptions {
   /// Create a new [GatewayApiOptions].
   GatewayApiOptions({
     required super.token,
+    required super.userId,
     super.userAgent,
     super.host,
     this.payloadFormat = GatewayPayloadFormat.json,

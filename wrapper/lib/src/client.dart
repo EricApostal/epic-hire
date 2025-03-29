@@ -81,16 +81,26 @@ abstract class Wrapper {
 
   /// Create an instance of [WrapperRest] that can perform requests to the HTTP API and is
   /// authenticated with a bot token.
-  static Future<WrapperRest> connectRest(
-    String token, {
+  static Future<WrapperRest> connectRest({
+    int? userId,
+    String? token,
     RestClientOptions options = const RestClientOptions(),
-  }) => connectRestWithOptions(RestApiOptions(token: token), options);
+  }) => connectRestWithOptions(
+    RestApiOptions(token: token, userId: userId),
+    options,
+  );
 
   /// Create an instance of [WrapperRest] using the provided options.
   static Future<WrapperRest> connectRestWithOptions(
     RestApiOptions apiOptions, [
     RestClientOptions clientOptions = const RestClientOptions(),
   ]) async {
+    assert(
+      ((apiOptions.token == null && apiOptions.userId == null) ||
+          (apiOptions.token != null && apiOptions.userId != null)),
+      "User ID and token must be provided together!",
+    );
+
     clientOptions.logger
       ..info('Connecting to the REST API')
       ..fine(
@@ -103,7 +113,11 @@ abstract class Wrapper {
     return _doConnect(apiOptions, clientOptions, () async {
       final client = WrapperRest._(apiOptions, clientOptions);
 
-      return client.._user = await client.users.fetchCurrentUser();
+      if (apiOptions.token != null) {
+        return client.._user = await client.users.fetchCurrentUser();
+      }
+
+      return client;
     }, clientOptions.plugins);
   }
 

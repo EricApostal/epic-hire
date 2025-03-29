@@ -71,10 +71,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Spacer(),
                 StyledTextButton(
                   "Submit",
-
                   callback: () async {
                     final resp = await ref
-                        .read(loginProvider.notifier)
+                        .read(authenticationProvider.notifier)
                         .login(
                           usernameController.text,
                           passwordController.text,
@@ -83,6 +82,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     print(resp?.user);
                   },
                   backgroundColor: Theme.of(context).custom.colorTheme.primary,
+                ),
+                const SizedBox(height: 12),
+                StyledTextButton(
+                  "Continue as Guest",
+                  callback: () async {},
+                  backgroundColor:
+                      Theme.of(context).custom.colorTheme.foreground,
                 ),
               ],
             ),

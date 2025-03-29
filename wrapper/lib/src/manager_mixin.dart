@@ -1,5 +1,6 @@
 import 'package:wrapper/src/client.dart';
 import 'package:wrapper/src/client_options.dart';
+import 'package:wrapper/src/http/managers/company_manager.dart';
 import 'package:wrapper/src/http/managers/user_manager.dart';
 
 /// An internal mixin to add managers to a [Wrapper] instance.
@@ -10,6 +11,9 @@ mixin ManagerMixin implements Wrapper {
   /// A [UserManager] that manages users for this client.
   UserManager get users =>
       UserManager(options.userCacheConfig, this as WrapperRest);
+
+  CompanyManager get companies =>
+      CompanyManager(options.companyCacheConfig, this as WrapperRest);
 
   // /// A [ChannelManager] that manages channels for this client.
   // ChannelManager get channels =>

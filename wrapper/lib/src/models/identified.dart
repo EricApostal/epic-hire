@@ -1,27 +1,5 @@
 /// A unique ID used to identify objects in the API.
-///
-/// {@template snowflake}
-/// Identifieds are generally unique across the API except in some cases where children share their
-/// parent's IDs.
-///
-/// {@template snowflake_ordering}
-/// Identifieds are ordered first by their [timestamp], then by [workerId], [processId] and
-/// [increment]. The last three fields are only used internally by Discord so the only ordering
-/// visible through the API is by [timestamp].
-/// {@endtemplate}
-///
-/// External references:
-/// * Discord API Reference: https://discord.com/developers/docs/reference#snowflakes
-/// {@endtemplate}
 class Identified implements Comparable<Identified> {
-  /// A [DateTime] representing the start of the Discord epoch.
-  ///
-  /// This is used as the epoch for [millisecondsSinceEpoch].
-  static final epoch = DateTime.utc(2015, 1, 1, 0, 0, 0);
-
-  /// The duration after which bulk delete operations are no longer valid.
-  static const bulkDeleteLimit = Duration(days: 14);
-
   /// A snowflake with a value of 0.
   static final zero = Identified(0);
 

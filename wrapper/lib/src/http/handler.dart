@@ -136,7 +136,7 @@ class HttpHandler {
       ..fine(request.loggingId)
       ..finer(
         'Rate Limit ID: ${request.rateLimitId}, Headers: ${request.headers}, Audit Log Reason: ${request.auditLogReason},'
-        ' Authenticated: ${request.authenticated}, Apply Global Rate Limit: ${request.applyGlobalRateLimit}',
+        ' Apply Global Rate Limit: ${request.applyGlobalRateLimit}',
       );
 
     if (request is BasicRequest) {

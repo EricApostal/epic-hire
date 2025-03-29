@@ -1,4 +1,5 @@
 import 'package:wrapper/src/client.dart';
+import 'package:wrapper/src/models/company/company.dart';
 import 'package:wrapper/src/models/user/user.dart';
 
 extension CacheUpdates on WrapperRest {
@@ -7,6 +8,7 @@ extension CacheUpdates on WrapperRest {
     // "Root" types - with their own cache
     // Events
     User() => entity.manager.cache[entity.id] = entity,
+    Company() => entity.manager.cache[entity.id] = entity,
     null => null,
     _ => () {
       assert(() {

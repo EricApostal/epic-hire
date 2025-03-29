@@ -39,11 +39,11 @@ abstract class HttpRequest {
   /// Only supported on certain endpoints.
   final String? auditLogReason;
 
-  /// Whether to add authentication to this request when sending it.
-  final bool authenticated;
-
   /// Whether to apply the global rate limit to this request.
   final bool applyGlobalRateLimit;
+
+  /// The api version to send the requst on
+  final int apiVersion;
 
   /// The identifier for the rate limit bucket for this request.
   String get rateLimitId => '$method ${route.rateLimitId}';
@@ -52,12 +52,12 @@ abstract class HttpRequest {
   ///
   /// {@macro http_request}
   HttpRequest(
-    this.route, {
+    this.route,
+    this.apiVersion, {
     this.method = 'GET',
     this.queryParameters = const {},
     this.headers = const {},
     this.auditLogReason,
-    this.authenticated = true,
     this.applyGlobalRateLimit = true,
   });
 
@@ -68,20 +68,22 @@ abstract class HttpRequest {
 
   Uri _getUri(Wrapper client) => Uri.https(
     client.apiOptions.host,
-    "${client.apiOptions.baseUri}/v${client.apiOptions.apiVersion.toString()}${route.path}",
+    "${client.apiOptions.baseUri}/v${apiVersion.toString()}${route.path}",
     queryParameters.isNotEmpty ? queryParameters : null,
   );
 
-  Map<String, String> _getHeaders(Wrapper client) => {
-    userAgent:
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-    if (auditLogReason != null) xAuditLogReason: auditLogReason!,
-    if (authenticated) authorization: client.apiOptions.authorizationHeader,
-    "Accept-Language": "en-US",
-    "Cache-Control": "no-cache",
-    "Pragma": "no-cache",
-    ...headers,
-  };
+  Map<String, String> _getHeaders(Wrapper client) {
+    return {
+      userAgent:
+          "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      if (auditLogReason != null) xAuditLogReason: auditLogReason!,
+      authorization: client.apiOptions.authorizationHeader ?? "",
+      "Accept-Language": "en-US",
+      "Cache-Control": "no-cache",
+      "Pragma": "no-cache",
+      ...headers,
+    };
+  }
 
   @override
   String toString() => 'HttpRequest($method $route)';
@@ -99,13 +101,13 @@ class BasicRequest extends HttpRequest {
 
   /// Create a new [BasicRequest].
   BasicRequest(
-    super.route, {
+    super.route,
+    super.apiVersion, {
     this.body,
     super.method,
     super.queryParameters,
     super.applyGlobalRateLimit,
     super.auditLogReason,
-    super.authenticated,
     super.headers,
   });
 
@@ -132,12 +134,12 @@ class FormDataRequest extends HttpRequest {
 
   /// Create a new [FormDataRequest].
   FormDataRequest(
-    super.route, {
+    super.route,
+    super.apiVersion, {
     this.formParams = const {},
     this.files = const [],
     super.applyGlobalRateLimit,
     super.auditLogReason,
-    super.authenticated,
     super.headers,
     super.method,
     super.queryParameters,
@@ -159,12 +161,12 @@ class FormDataRequest extends HttpRequest {
 class MultipartRequest extends FormDataRequest {
   /// Create a new [MultipartRequest].
   MultipartRequest(
-    super.route, {
+    super.route,
+    super.apiVersion, {
     String? jsonPayload,
     super.files,
     super.applyGlobalRateLimit,
     super.auditLogReason,
-    super.authenticated,
     super.headers,
     super.method,
     super.queryParameters,
