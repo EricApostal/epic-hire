@@ -1,0 +1,49 @@
+import 'package:wrapper/src/cache/cache.dart';
+import 'package:wrapper/src/models/user/user.dart';
+import 'package:wrapper/src/plugin/plugin.dart';
+import 'package:logging/logging.dart';
+
+/// Options for controlling the behavior of a [Nyxx] client.
+abstract class ClientOptions {
+  /// The plugins to use for this client.
+  final List<WrapperPlugin> plugins;
+
+  /// The name of the logger to use for this client.
+  final String loggerName;
+
+  /// The logger to use for this client.
+  Logger get logger => Logger(loggerName);
+
+  /// Create a new [ClientOptions].
+  const ClientOptions({this.plugins = const [], this.loggerName = 'Wrapper'});
+}
+
+/// Options for controlling the behavior of a [NyxxRest] client.
+class RestClientOptions extends ClientOptions {
+  /// The [CacheConfig] to use for the cache of the [NyxxRest.users] manager.
+  final CacheConfig<User> userCacheConfig;
+
+  /// Create a new [RestClientOptions].
+  const RestClientOptions({
+    super.plugins,
+    super.loggerName,
+    this.userCacheConfig = const CacheConfig(),
+  });
+}
+
+/// Options for controlling the behavior of a [NyxxGateway] client.
+class GatewayClientOptions extends RestClientOptions {
+  /// The minimum number of session starts this client needs to connect.
+  ///
+  /// This is a safety feature to avoid API bans due to excessive connection starts.
+  ///
+  /// If the remaining number of session starts is below this number, an error will be thrown when connecting.
+  final int minimumSessionStarts;
+
+  /// Create a new [GatewayClientOptions].
+  const GatewayClientOptions({
+    this.minimumSessionStarts = 10,
+    super.plugins,
+    super.loggerName,
+  });
+}
