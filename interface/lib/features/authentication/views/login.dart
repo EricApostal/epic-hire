@@ -1,5 +1,9 @@
+import 'package:epic_hire/features/authentication/components/login_box.dart';
+import 'package:epic_hire/shared/components/buttons/styled_text_button.dart';
+import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -11,6 +15,62 @@ class LoginScreen extends ConsumerStatefulWidget {
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Form(child: Column()));
+    return Scaffold(
+      // resizeToAvoidBottomInset: false,
+      body: Center(
+        child: Form(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(
+              16,
+              MediaQuery.of(context).padding.top + 16,
+              16,
+              MediaQuery.of(context).padding.bottom + 16,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  "assets/icons/epic-hire-banner.svg",
+                  height: 90,
+                ),
+                const SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Login to Epic Hire",
+                          style: Theme.of(context).custom.textTheme.titleLarge,
+                        ),
+                        Text(
+                          "We're happy to have you back!",
+                          style: Theme.of(context).custom.textTheme.subtitle1,
+                        ),
+                        const SizedBox(height: 20),
+                      ],
+                    ),
+                  ),
+                ),
+                LoginBox(hintText: "Username"),
+                const SizedBox(height: 12),
+                LoginBox(hintText: "Password"),
+                Spacer(),
+                StyledTextButton(
+                  "Submit",
+                  callback: () {
+                    print("clicked!");
+                  },
+                  backgroundColor: Theme.of(context).custom.colorTheme.primary,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

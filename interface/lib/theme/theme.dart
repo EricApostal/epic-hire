@@ -62,6 +62,16 @@ final _darkTheme = ThemeData(
     color: AppColorsDark.foreground,
     thickness: 0.1,
   ),
+  textSelectionTheme: TextSelectionThemeData(
+    cursorColor: AppColorsDark.dirtyWhite,
+    selectionColor: AppColorsDark.dirtyWhite.withOpacity(0.4),
+    selectionHandleColor: AppColorsDark.dirtyWhite,
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.grey),
+    ),
+  ),
 );
 
 extension CustomTheme on ThemeData {
