@@ -4,7 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginBox extends ConsumerStatefulWidget {
   final String hintText;
-  const LoginBox({super.key, required this.hintText});
+  final TextEditingController controller;
+  final List<String>? autofillHints;
+  const LoginBox({
+    super.key,
+    required this.hintText,
+    required this.controller,
+    this.autofillHints,
+  });
 
   @override
   ConsumerState<LoginBox> createState() => _LoginBoxState();
@@ -23,6 +30,9 @@ class _LoginBoxState extends ConsumerState<LoginBox> {
         padding: const EdgeInsets.all(0),
         child: TextFormField(
           style: theme.textTheme.bodyText1,
+          controller: widget.controller,
+          autofillHints: widget.autofillHints,
+
           decoration: InputDecoration(
             border: InputBorder.none,
             enabledBorder: InputBorder.none,

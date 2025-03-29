@@ -1,4 +1,5 @@
 import 'package:epic_hire/features/authentication/components/login_box.dart';
+import 'package:epic_hire/features/authentication/repositories/login.dart';
 import 'package:epic_hire/shared/components/buttons/styled_text_button.dart';
 import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +14,11 @@ class LoginScreen extends ConsumerStatefulWidget {
 }
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
       body: Center(
         child: Form(
           child: Padding(
@@ -55,14 +57,30 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                   ),
                 ),
-                LoginBox(hintText: "Username"),
+                LoginBox(
+                  hintText: "Email",
+                  controller: usernameController,
+                  autofillHints: ["email", "username"],
+                ),
                 const SizedBox(height: 12),
-                LoginBox(hintText: "Password"),
+                LoginBox(
+                  hintText: "Password",
+                  controller: passwordController,
+                  autofillHints: ["password"],
+                ),
                 Spacer(),
                 StyledTextButton(
                   "Submit",
-                  callback: () {
-                    print("clicked!");
+
+                  callback: () async {
+                    final resp = await ref
+                        .read(loginProvider.notifier)
+                        .login(
+                          usernameController.text,
+                          passwordController.text,
+                        );
+
+                    print(resp?.user);
                   },
                   backgroundColor: Theme.of(context).custom.colorTheme.primary,
                 ),
