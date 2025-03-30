@@ -76,25 +76,21 @@ class _BarWidgetState extends ConsumerState<NavigationBarWidget> {
                 NavigatorIcon(
                   path: '/home',
                   iconAsset: 'assets/icons/home.svg',
-                  label: 'Home',
                   selected: isHome,
                 ),
                 NavigatorIcon(
                   path: '/network',
-                  iconAsset: 'assets/icons/messages.svg',
-                  label: 'Network',
+                  iconAsset: 'assets/icons/network.svg',
                   selected: isNetwork,
                 ),
                 NavigatorIcon(
                   path: '/jobs',
-                  iconAsset: 'assets/icons/notifications.svg',
-                  label: 'Jobs',
+                  iconAsset: 'assets/icons/job.svg',
                   selected: isJobs,
                 ),
                 NavigatorIcon(
                   path: '/companies',
-                  iconAsset: 'assets/icons/notifications.svg',
-                  label: 'Companies',
+                  iconAsset: 'assets/icons/company.svg',
                   selected: isCompanies,
                 ),
               ],
@@ -119,16 +115,16 @@ class _BarWidgetState extends ConsumerState<NavigationBarWidget> {
 
 class NavigatorIcon extends StatelessWidget {
   final String iconAsset;
-  final String label;
   final String path;
   final bool selected;
+  final String? label;
 
   const NavigatorIcon({
     super.key,
     required this.iconAsset,
-    required this.label,
     required this.path,
     required this.selected,
+    this.label,
   });
 
   @override
@@ -161,19 +157,21 @@ class NavigatorIcon extends StatelessWidget {
               colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
               height: 25,
             ),
-            DefaultTextStyle(
-              style: Theme.of(
-                context,
-              ).custom.textTheme.subtitle2.copyWith(fontSize: 9, color: color),
-              child: Text(
-                label,
-                textAlign: TextAlign.center,
+            if (label != null)
+              DefaultTextStyle(
                 style: Theme.of(context).custom.textTheme.subtitle2.copyWith(
                   fontSize: 9,
                   color: color,
                 ),
+                child: Text(
+                  label!,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).custom.textTheme.subtitle2.copyWith(
+                    fontSize: 9,
+                    color: color,
+                  ),
+                ),
               ),
-            ),
           ],
         ),
       ),

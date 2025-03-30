@@ -1,7 +1,10 @@
 import 'package:wrapper/src/client.dart';
 import 'package:wrapper/src/client_options.dart';
+import 'package:wrapper/src/http/managers/club_manager.dart';
+import 'package:wrapper/src/http/managers/school_manager.dart';
 import 'package:wrapper/src/http/managers/company_manager.dart';
 import 'package:wrapper/src/http/managers/user_manager.dart';
+import 'package:wrapper/src/models/club/school.dart';
 
 /// An internal mixin to add managers to a [Wrapper] instance.
 mixin ManagerMixin implements Wrapper {
@@ -14,6 +17,12 @@ mixin ManagerMixin implements Wrapper {
 
   CompanyManager get companies =>
       CompanyManager(options.companyCacheConfig, this as WrapperRest);
+
+  SchoolManager get schools =>
+      SchoolManager(options.schoolCacheConfig, this as WrapperRest);
+
+  ClubManager get clubs =>
+      ClubManager(options.clubCacheConfig, this as WrapperRest);
 
   // /// A [ChannelManager] that manages channels for this client.
   // ChannelManager get channels =>

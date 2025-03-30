@@ -55,7 +55,7 @@ class Authentication extends _$Authentication {
       token: "Bearer ${user.token}",
       options: RestClientOptions(),
     );
-    print("setting clinet!");
+
     state = AsyncValue.data(client);
     return client;
   }

@@ -62,7 +62,7 @@ class CompanyManager extends ReadOnlyManager<Company> {
           ..public()
           ..companyPages()
           ..search();
-    final request = BasicRequest(route, 1);
+    final request = BasicRequest(route, 1, queryParameters: {"limit": "4"});
 
     final response = await client.httpHandler.executeSafe(request);
     final companies = parseMany(response.jsonBody as List<dynamic>, (e) {

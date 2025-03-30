@@ -1,4 +1,6 @@
 import 'package:wrapper/src/cache/cache.dart';
+import 'package:wrapper/src/models/club/club.dart';
+import 'package:wrapper/src/models/club/school.dart';
 import 'package:wrapper/src/models/company/company.dart';
 import 'package:wrapper/src/models/user/user.dart';
 import 'package:wrapper/src/plugin/plugin.dart';
@@ -27,12 +29,20 @@ class RestClientOptions extends ClientOptions {
   /// The [CacheConfig] to use for the cache of the [NyxxRest.companies] manager.
   final CacheConfig<Company> companyCacheConfig;
 
+  /// The [CacheConfig] to use for the cache of the [NyxxRest.schools] manager.
+  final CacheConfig<School> schoolCacheConfig;
+
+  /// The [CacheConfig] to use for the cache of the [NyxxRest.clubs] manager.
+  final CacheConfig<Club> clubCacheConfig;
+
   /// Create a new [RestClientOptions].
   const RestClientOptions({
     super.plugins,
     super.loggerName,
     this.userCacheConfig = const CacheConfig(),
     this.companyCacheConfig = const CacheConfig(),
+    this.schoolCacheConfig = const CacheConfig(),
+    this.clubCacheConfig = const CacheConfig(),
   });
 }
 
