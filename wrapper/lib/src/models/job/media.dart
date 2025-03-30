@@ -1,10 +1,10 @@
-class Media {
+class JobMedia {
   final int id;
   final String mediaKey;
   final dynamic caption;
   final int position;
 
-  Media({
+  JobMedia({
     required this.id,
     required this.mediaKey,
     this.caption,

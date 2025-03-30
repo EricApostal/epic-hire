@@ -79,8 +79,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           usernameController.text,
                           passwordController.text,
                         );
-
-                    print(resp?.user);
+                    GoRouter.of(context).go("/home");
                   },
                   backgroundColor: Theme.of(context).custom.colorTheme.primary,
                 ),

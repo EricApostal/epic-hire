@@ -2,7 +2,7 @@ import 'package:epic_hire/features/authentication/views/login.dart';
 import 'package:epic_hire/features/company/views/summary_view.dart';
 import 'package:epic_hire/features/home/views/home.dart';
 import 'package:epic_hire/features/home/views/navigation_frame.dart';
-import 'package:flutter/material.dart';
+import 'package:epic_hire/features/jobs/views/jobs.dart';
 import 'package:go_router/go_router.dart';
 
 final routerController = GoRouter(
@@ -28,6 +28,12 @@ final routerController = GoRouter(
                 key: state.pageKey,
                 child: CompanySummaryListScreen(),
               ),
+        ),
+        GoRoute(
+          path: "/jobs",
+          pageBuilder:
+              (context, state) =>
+                  NoTransitionPage<void>(key: state.pageKey, child: JobsList()),
         ),
       ],
     ),

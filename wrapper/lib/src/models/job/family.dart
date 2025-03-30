@@ -1,6 +1,6 @@
-class Family {
+class JobFamily {
   final int id;
   final String name;
 
-  Family({required this.id, required this.name});
+  JobFamily({required this.id, required this.name});
 }

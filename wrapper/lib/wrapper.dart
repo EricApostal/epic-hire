@@ -36,6 +36,13 @@ export 'src/models/company/company.dart' show PartialCompany, Company;
 export 'src/models/company/story.dart' show PartialStory, Story;
 export 'src/models/club/club.dart' show PartialClub, Club;
 export 'src/models/school/school.dart' show PartialSchool, School;
+export 'src/models/job/job.dart' show PartialJob, Job;
+export 'src/models/job/category.dart' show JobCategory;
+export 'src/models/job/family.dart' show JobFamily;
+export 'src/models/job/highlight.dart' show JobHighlight;
+export 'src/models/job/location.dart' show Location;
+export 'src/models/job/media.dart' show JobMedia;
+export 'src/models/job/reaction.dart' show Reaction;
 
 export 'src/plugin/plugin.dart' show WrapperPlugin, NyxxPluginState;
 export 'src/plugin/logging.dart' show Logging, logging;

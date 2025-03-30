@@ -10,7 +10,7 @@ class PartialSchool extends ManagedIdentifiedEntity<School> {
 
 class School extends PartialSchool {
   final String? mongoObjectId;
-  final String name;
+  final String? name;
   final String state;
   final String abbreviation;
   final dynamic conference;

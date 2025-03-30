@@ -115,6 +115,8 @@ abstract class Wrapper {
 
       if (apiOptions.token != null) {
         return client.._user = await client.users.fetchCurrentUser();
+      } else {
+        client._user = null;
       }
 
       return client;
@@ -144,8 +146,8 @@ class WrapperRest with ManagerMixin implements Wrapper {
   @override
   final Completer<void> _initializedCompleter = Completer();
 
-  PartialUser get user => _user;
-  late final PartialUser _user;
+  PartialUser? get user => _user;
+  late PartialUser? _user;
 
   WrapperRest._(this.apiOptions, this.options);
 

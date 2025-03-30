@@ -3,7 +3,7 @@ import 'package:wrapper/src/models/job/media.dart';
 class JobHighlight {
   final int id;
   final String caption;
-  final List<Media> media;
+  final List<JobMedia> media;
   final int position;
   final String? startDate;
   final bool active;

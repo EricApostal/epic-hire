@@ -1,4 +1,7 @@
 import 'package:wrapper/src/http/managers/manager.dart';
+import 'package:wrapper/src/http/request.dart';
+import 'package:wrapper/src/http/route.dart';
+import 'package:wrapper/src/models/company/story.dart';
 import 'package:wrapper/src/models/identified.dart';
 import 'package:wrapper/src/models/identified_entity/identified_entity.dart';
 import 'package:wrapper/src/models/job/category.dart';
@@ -8,16 +11,14 @@ import 'package:wrapper/src/models/job/job.dart';
 import 'package:wrapper/src/models/job/location.dart';
 import 'package:wrapper/src/models/job/media.dart';
 import 'package:wrapper/src/models/job/reaction.dart';
-import 'package:wrapper/src/models/job/story.dart';
-import 'package:wrapper/src/utils/parsing_helpers.dart'; // Assuming this is where parseMany is defined
+import 'package:wrapper/src/utils/parsing_helpers.dart';
 
 class JobManager extends ReadOnlyManager<Job> {
   /// Create a new [CompanyManager].
   JobManager(super.config, super.client) : super(identifier: 'schools');
 
-  // Parsing functions for related models
-  Family parseFamily(Map<String, Object?> raw) {
-    return Family(id: raw["id"] as int, name: raw["name"] as String);
+  JobFamily parseFamily(Map<String, Object?> raw) {
+    return JobFamily(id: raw["id"] as int, name: raw["name"] as String);
   }
 
   JobCategory parseJobCategory(Map<String, Object?> raw) {
@@ -47,8 +48,8 @@ class JobManager extends ReadOnlyManager<Job> {
     );
   }
 
-  Media parseMedia(Map<String, Object?> raw) {
-    return Media(
+  JobMedia parseMedia(Map<String, Object?> raw) {
+    return JobMedia(
       id: raw["id"] as int,
       mediaKey: raw["mediaKey"] as String,
       caption: raw["caption"],
@@ -84,8 +85,8 @@ class JobManager extends ReadOnlyManager<Job> {
 
   Story parseStory(Map<String, Object?> raw) {
     return Story(
-      id: raw["id"] as int,
-      created: raw["created"] as String,
+      id: Identified(raw["id"] as int),
+      created: DateTime.parse(raw["created"] as String),
       imageKey: raw["imageKey"] as String,
       caption: raw["caption"] as String,
       reactions: parseMany(
@@ -93,7 +94,7 @@ class JobManager extends ReadOnlyManager<Job> {
         (e) => parseReaction(e as Map<String, Object?>),
       ),
       commentsDisabled: raw["commentsDisabled"] as bool,
-      modified: raw["modified"] as String,
+      modified: DateTime.parse(raw["modified"] as String),
       isHighlighted: raw["isHighlighted"] as bool,
       position: raw["position"] as int,
     );
@@ -117,8 +118,11 @@ class JobManager extends ReadOnlyManager<Job> {
       id: Identified(raw["id"] as int),
       manager: this,
       title: raw["title"] as String,
-      family: parseFamily(raw["family"] as Map<String, Object?>),
-      category: parseJobCategory(raw["category"] as Map<String, Object?>),
+      family: tryParse(raw["family"] as Map<String, Object?>?, parseFamily),
+      category: tryParse(
+        raw["category"] as Map<String, Object?>?,
+        parseJobCategory,
+      ),
       categories: parseMany(
         raw["categories"] as List<dynamic>,
         (e) => parseJobCategory(e as Map<String, Object?>),
@@ -135,13 +139,38 @@ class JobManager extends ReadOnlyManager<Job> {
       company: client.companies.parse(
         raw["companyPage"] as Map<String, Object?>,
       ),
-      startDate: raw["startDate"] as String,
+      startDate:
+          (raw["startDate"] != null)
+              ? DateTime.parse(raw["startDate"] as String)
+              : null,
       summary: raw["summary"] as String,
-      created: raw["created"] as String,
+      created: DateTime.parse(raw["created"] as String),
       recommendedForSignedInUser: raw["recommendedForSignedInUser"],
       signedInUserWasInvited: raw["signedInUserWasInvited"],
       closeReason: raw["closeReason"],
       signedInUserIsInterested: raw["signedInUserIsInterested"] as bool,
     );
+  }
+
+  Future<List<Job>> fetchJobListings({int? page, int? limit}) async {
+    final route =
+        HttpRoute()
+          ..public()
+          ..jobBoard();
+    final request = BasicRequest(
+      route,
+      1,
+      queryParameters: {
+        if (page != null) "page": page.toString(),
+        if (limit != null) "limit": limit.toString(),
+      },
+    );
+
+    final response = await client.httpHandler.executeSafe(request);
+    final jobs = parseMany(
+      (response.jsonBody as Map<String, dynamic>)["data"],
+      (e) => parse(e as Map<String, Object?>),
+    );
+    return jobs;
   }
 }

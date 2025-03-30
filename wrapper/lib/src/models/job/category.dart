@@ -4,7 +4,7 @@ class JobCategory {
   final int id;
   final String name;
   final String imageKey;
-  final Family family;
+  final JobFamily family;
   final List<String> playbookTags;
   final String? mongoObjectId;
 
