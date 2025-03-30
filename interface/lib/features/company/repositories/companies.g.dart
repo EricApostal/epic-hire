@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login.dart';
+part of 'companies.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authenticationHash() => r'e27dfdf17e8657564923dfde799c6792f666b219';
+String _$companiesHash() => r'c1219586f2f30f97a6a92ea2e2591dad9343ce2d';
 
-/// See also [Authentication].
-@ProviderFor(Authentication)
-final authenticationProvider =
-    AsyncNotifierProvider<Authentication, WrapperRest?>.internal(
-      Authentication.new,
-      name: r'authenticationProvider',
+/// See also [Companies].
+@ProviderFor(Companies)
+final companiesProvider =
+    AsyncNotifierProvider<Companies, List<Company>?>.internal(
+      Companies.new,
+      name: r'companiesProvider',
       debugGetCreateSourceHash:
           const bool.fromEnvironment('dart.vm.product')
               ? null
-              : _$authenticationHash,
+              : _$companiesHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$Authentication = AsyncNotifier<WrapperRest?>;
+typedef _$Companies = AsyncNotifier<List<Company>?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

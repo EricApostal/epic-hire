@@ -26,7 +26,7 @@ abstract class ApiOptions {
   final String host;
 
   /// The host at which the CDN can be found.
-  String get cdnHost => 'IMPLEMENT_ME';
+  String get cdnHost => 'https://epic-hire.s3.amazonaws.com/';
 
   /// Create a new [ApiOptions].
   ApiOptions({this.userAgent = defaultUserAgent, this.host = defaultHost});

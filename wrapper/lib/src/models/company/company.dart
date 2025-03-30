@@ -1,4 +1,5 @@
 import 'package:wrapper/src/http/managers/company_manager.dart';
+import 'package:wrapper/src/models/company/story.dart';
 import 'package:wrapper/src/models/identified_entity/identified_entity.dart';
 
 class PartialCompany extends ManagedIdentifiedEntity<Company> {
@@ -16,6 +17,8 @@ class Company extends PartialCompany {
   final int hires;
   final int followers;
   final List<dynamic> jobCategories;
+  final List<Story> stories;
+  final String? imageKey;
 
   Company({
     required super.id,
@@ -27,5 +30,7 @@ class Company extends PartialCompany {
     required this.hires,
     required this.followers,
     required this.jobCategories,
+    required this.stories,
+    this.imageKey,
   });
 }

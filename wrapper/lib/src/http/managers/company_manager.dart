@@ -2,6 +2,7 @@ import 'package:wrapper/src/http/managers/manager.dart';
 import 'package:wrapper/src/http/request.dart';
 import 'package:wrapper/src/http/route.dart';
 import 'package:wrapper/src/models/company/company.dart';
+import 'package:wrapper/src/models/company/story.dart';
 import 'package:wrapper/src/models/identified.dart';
 import 'package:wrapper/src/models/identified_entity/identified_entity.dart';
 import 'package:wrapper/src/utils/cache_helpers.dart';
@@ -36,6 +37,22 @@ class CompanyManager extends ReadOnlyManager<Company> {
       hires: raw["hires"] as int,
       followers: raw["followers"] as int,
       jobCategories: raw["jobCategories"] as List<dynamic>,
+      stories: parseMany(raw["stories"] as List<dynamic>, parseStory),
+      imageKey: raw["imageKey"] as String?,
+    );
+  }
+
+  Story parseStory(Map<String, Object?> raw) {
+    return Story(
+      id: Identified(raw["id"] as int),
+      created: DateTime.parse(raw["created"] as String),
+      imageKey: raw["imageKey"] as String,
+      reactions: raw["reactions"] as List<dynamic>,
+      caption: raw["caption"] as String,
+      commentsDisabled: raw["captionsDisabled"] as bool? ?? false,
+      modified: DateTime.parse(raw["modified"] as String),
+      isHighlighted: raw["isHighlighted"] as bool,
+      position: raw["position"] as int,
     );
   }
 
@@ -52,7 +69,7 @@ class CompanyManager extends ReadOnlyManager<Company> {
       return parse(e as Map<String, Object?>);
     });
 
-    // companies.forEach(client.updateCacheWith);
+    companies.forEach(client.updateCacheWith);
     return companies;
   }
 }

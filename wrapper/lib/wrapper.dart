@@ -29,6 +29,8 @@ export 'src/http/managers/manager.dart' show Manager, ReadOnlyManager;
 export 'src/http/managers/user_manager.dart' show UserManager;
 
 export 'src/models/user/user.dart' show PartialUser, User;
+export 'src/models/company/company.dart' show PartialCompany, Company;
+export 'src/models/company/story.dart' show PartialStory, Story;
 
 export 'src/plugin/plugin.dart' show WrapperPlugin, NyxxPluginState;
 export 'src/plugin/logging.dart' show Logging, logging;

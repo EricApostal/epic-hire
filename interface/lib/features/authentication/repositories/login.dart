@@ -50,10 +50,19 @@ class Authentication extends _$Authentication {
       companyPageIds: body["companyPageIds"],
       accountStatus: body["accountStatus"],
     );
-    return await Wrapper.connectRest(
+    final client = await Wrapper.connectRest(
       userId: user.id,
       token: "Bearer ${user.token}",
       options: RestClientOptions(),
     );
+    print("setting clinet!");
+    state = AsyncValue.data(client);
+    return client;
+  }
+
+  Future<WrapperRest?> loginAsGuest() async {
+    final client = await Wrapper.connectRest();
+    state = AsyncValue.data(client);
+    return client;
   }
 }
