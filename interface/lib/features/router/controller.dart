@@ -1,6 +1,8 @@
 import 'package:epic_hire/features/authentication/views/login.dart';
+import 'package:epic_hire/features/company/views/summary_view.dart';
 import 'package:epic_hire/features/home/views/home.dart';
 import 'package:epic_hire/features/home/views/navigation_frame.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final routerController = GoRouter(
@@ -11,7 +13,22 @@ final routerController = GoRouter(
     ShellRoute(
       builder: (context, state, child) => NavigationFrame(child: child),
       routes: [
-        GoRoute(path: "/home", builder: (context, state) => HomeScreen()),
+        GoRoute(
+          path: "/home",
+          pageBuilder:
+              (context, state) => NoTransitionPage<void>(
+                key: state.pageKey,
+                child: HomeScreen(),
+              ),
+        ),
+        GoRoute(
+          path: "/companies",
+          pageBuilder:
+              (context, state) => NoTransitionPage<void>(
+                key: state.pageKey,
+                child: CompanySummaryListScreen(),
+              ),
+        ),
       ],
     ),
   ],

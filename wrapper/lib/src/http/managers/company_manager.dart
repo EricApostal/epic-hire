@@ -29,16 +29,40 @@ class CompanyManager extends ReadOnlyManager<Company> {
   Company parse(Map<String, Object?> raw) {
     return Company(
       manager: this,
-      id: Identified(raw["id"] as int),
       name: raw["name"] as String,
-      permissions: raw["permissions"] as List<dynamic>,
+      permissions: List<String>.from(raw["permissions"] as List),
+      id: Identified(raw["id"] as int),
+      website: raw["website"] as String,
+      imageKey: raw["imageKey"] as String,
+      schools: parseMany(
+        raw["colleges"] as List<dynamic>,
+        (e) => client.schools.parse(e as Map<String, Object?>),
+      ),
+      nationalVisibility: raw["nationalVisibility"] as bool,
+      highlights: parseMany(
+        raw["highlights"] as List<dynamic>,
+        (e) => client.jobs.parseJobHighlight(e as Map<String, Object?>),
+      ),
       published: raw["published"] as bool,
       weight: raw["weight"] as int,
-      hires: raw["hires"] as int,
       followers: raw["followers"] as int,
-      jobCategories: raw["jobCategories"] as List<dynamic>,
-      stories: parseMany(raw["stories"] as List<dynamic>, parseStory),
-      imageKey: raw["imageKey"] as String?,
+      stories: parseMany(
+        raw["stories"] as List<dynamic>,
+        (e) => parseStory(e as Map<String, Object?>),
+      ),
+      jobCategories: parseMany(
+        raw["jobCategories"] as List<dynamic>,
+        (e) => client.jobs.parseJobCategory(e as Map<String, Object?>),
+      ),
+      locations: parseMany(
+        raw["locations"] as List<dynamic>,
+        (e) => client.jobs.parseLocation(e as Map<String, Object?>),
+      ),
+      more: List<dynamic>.from(raw["more"] as List),
+      hires: raw["hires"] as int,
+      industry: raw["industry"],
+      userBadges: List<dynamic>.from(raw["userBadges"] as List),
+      signedInUserIsAdmin: raw["signedInUserIsAdmin"] as bool,
     );
   }
 

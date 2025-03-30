@@ -87,4 +87,5 @@ extension RouteHelpers on HttpRoute {
   void companyPages() => add(HttpRoutePart("company-pages"));
   void clubs() => add(HttpRoutePart("clubs"));
   void search() => add(HttpRoutePart("search"));
+  void jobBoard() => add(HttpRoutePart("job-board"));
 }

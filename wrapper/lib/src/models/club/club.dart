@@ -1,5 +1,5 @@
 import 'package:wrapper/src/http/managers/club_manager.dart';
-import 'package:wrapper/src/models/club/school.dart';
+import 'package:wrapper/src/models/school/school.dart';
 import 'package:wrapper/src/models/identified_entity/identified_entity.dart';
 
 class PartialClub extends ManagedIdentifiedEntity<Club> {
@@ -20,7 +20,7 @@ class Club extends PartialClub {
   final bool isNational;
   final List<String> memberProfilePictureKeys;
   final List<School> schools;
-  final String? imageKey;
+  final String? logoKey;
 
   Club({
     required super.id,
@@ -35,6 +35,6 @@ class Club extends PartialClub {
     required this.isNational,
     required this.memberProfilePictureKeys,
     required this.schools,
-    this.imageKey,
+    this.logoKey,
   });
 }

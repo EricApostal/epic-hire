@@ -1,5 +1,5 @@
 import 'package:wrapper/src/http/managers/manager.dart';
-import 'package:wrapper/src/models/club/school.dart';
+import 'package:wrapper/src/models/school/school.dart';
 import 'package:wrapper/src/models/identified.dart';
 import 'package:wrapper/src/models/identified_entity/identified_entity.dart';
 
@@ -24,10 +24,13 @@ class SchoolManager extends ReadOnlyManager<School> {
     return School(
       manager: this,
       id: Identified(raw["id"] as int),
-      abbreviation: raw["abbreviation"] as String,
+      mongoObjectId: raw["mongoObjectId"] as String?,
       name: raw["name"] as String,
       state: raw["state"] as String,
-      isHbcu: raw["isHbcu"] as bool,
+      abbreviation: raw["abbreviation"] as String,
+      conference: raw["conference"],
+      location: raw["location"],
+      hbcu: raw["hbcu"] as bool? ?? false,
     );
   }
 }

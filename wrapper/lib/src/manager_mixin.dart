@@ -1,6 +1,7 @@
 import 'package:wrapper/src/client.dart';
 import 'package:wrapper/src/client_options.dart';
 import 'package:wrapper/src/http/managers/club_manager.dart';
+import 'package:wrapper/src/http/managers/job_manager.dart';
 import 'package:wrapper/src/http/managers/school_manager.dart';
 import 'package:wrapper/src/http/managers/company_manager.dart';
 import 'package:wrapper/src/http/managers/user_manager.dart';
@@ -22,6 +23,9 @@ mixin ManagerMixin implements Wrapper {
 
   ClubManager get clubs =>
       ClubManager(options.clubCacheConfig, this as WrapperRest);
+
+  JobManager get jobs =>
+      JobManager(options.jobCacheConfig, this as WrapperRest);
 
   // /// A [ChannelManager] that manages channels for this client.
   // ChannelManager get channels =>

@@ -59,7 +59,7 @@ final _darkTheme = ThemeData(
     color: AppColorsDark.primary,
   ),
   dividerTheme: const DividerThemeData(
-    color: AppColorsDark.foreground,
+    color: AppColorsDark.dirtyWhite,
     thickness: 0.1,
   ),
   textSelectionTheme: TextSelectionThemeData(

@@ -35,7 +35,7 @@ export 'src/models/user/user.dart' show PartialUser, User;
 export 'src/models/company/company.dart' show PartialCompany, Company;
 export 'src/models/company/story.dart' show PartialStory, Story;
 export 'src/models/club/club.dart' show PartialClub, Club;
-export 'src/models/club/school.dart' show PartialSchool, School;
+export 'src/models/school/school.dart' show PartialSchool, School;
 
 export 'src/plugin/plugin.dart' show WrapperPlugin, NyxxPluginState;
 export 'src/plugin/logging.dart' show Logging, logging;

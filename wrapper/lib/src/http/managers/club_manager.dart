@@ -42,10 +42,15 @@ class ClubManager extends ReadOnlyManager<Club> {
               .map((e) => e as String)
               .toList(),
       schools: parseMany(raw["schools"] as List<dynamic>, client.schools.parse),
+      logoKey: raw["logoKey"] as String?,
     );
   }
 
-  Future<List<Club>> fetchPage(int page, {int? limit}) async {
+  Future<List<Club>> fetchPage(
+    int page, {
+    int? limit,
+    bool? onlyShowFeatured,
+  }) async {
     final route =
         HttpRoute()
           ..public()
@@ -57,6 +62,7 @@ class ClubManager extends ReadOnlyManager<Club> {
       2,
       queryParameters: {
         "page": page.toString(),
+        if (onlyShowFeatured != null) "featured": onlyShowFeatured.toString(),
         if (limit != null) "limit": limit.toString(),
       },
     );

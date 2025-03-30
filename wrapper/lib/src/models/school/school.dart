@@ -9,17 +9,23 @@ class PartialSchool extends ManagedIdentifiedEntity<School> {
 }
 
 class School extends PartialSchool {
-  final String abbreviation;
-  final bool isHbcu;
+  final String? mongoObjectId;
   final String name;
   final String state;
+  final String abbreviation;
+  final dynamic conference;
+  final dynamic location;
+  final bool hbcu;
 
   School({
     required super.id,
     required super.manager,
+    required this.mongoObjectId,
     required this.name,
-    required this.abbreviation,
     required this.state,
-    required this.isHbcu,
+    required this.abbreviation,
+    this.conference,
+    this.location,
+    required this.hbcu,
   });
 }

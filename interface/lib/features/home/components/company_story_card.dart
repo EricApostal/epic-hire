@@ -1,3 +1,4 @@
+import 'package:epic_hire/shared/components/image/fade_in.dart';
 import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,10 +32,12 @@ class _CompanyStoryCardState extends ConsumerState<CompanyStoryCard> {
                 const SizedBox(width: 8),
                 if (widget.company.imageKey != null)
                   ClipOval(
-                    child: Image.network(
-                      width: 30,
-                      height: 30,
-                      "https://epic-hire.s3.amazonaws.com/${widget.company.imageKey!}",
+                    child: CustomFadeInWidget(
+                      image: Image.network(
+                        width: 30,
+                        height: 30,
+                        "https://epic-hire.s3.amazonaws.com/${widget.company.imageKey!}",
+                      ),
                     ),
                   ),
                 SizedBox(width: 10),
@@ -44,8 +47,12 @@ class _CompanyStoryCardState extends ConsumerState<CompanyStoryCard> {
             const SizedBox(height: 10),
             ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(0)),
-              child: Image.network(
-                "https://epic-hire.s3.amazonaws.com/${widget.company.stories.first.imageKey!}",
+              child: CustomFadeInWidget(
+                image: Image.network(
+                  "https://epic-hire.s3.amazonaws.com/${widget.company.stories.first.imageKey}",
+                  height: 400,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(height: 4),
