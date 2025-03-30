@@ -62,12 +62,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   hintText: "Email",
                   controller: usernameController,
                   autofillHints: ["email", "username"],
+                  obscureText: false,
                 ),
                 const SizedBox(height: 12),
                 LoginBox(
                   hintText: "Password",
                   controller: passwordController,
                   autofillHints: ["password"],
+                  obscureText: true,
                 ),
                 Spacer(),
                 StyledTextButton(

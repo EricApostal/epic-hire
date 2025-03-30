@@ -1,7 +1,6 @@
 import 'package:wrapper/src/http/managers/manager.dart';
 import 'package:wrapper/src/http/request.dart';
 import 'package:wrapper/src/http/route.dart';
-import 'package:wrapper/src/models/company/story.dart';
 import 'package:wrapper/src/models/identified.dart';
 import 'package:wrapper/src/models/identified_entity/identified_entity.dart';
 import 'package:wrapper/src/models/job/category.dart';
@@ -80,23 +79,6 @@ class JobManager extends ReadOnlyManager<Job> {
       type: raw["type"] as String,
       userId: raw["userId"] as int,
       mongoObjectId: raw["mongoObjectId"],
-    );
-  }
-
-  Story parseStory(Map<String, Object?> raw) {
-    return Story(
-      id: Identified(raw["id"] as int),
-      created: DateTime.parse(raw["created"] as String),
-      imageKey: raw["imageKey"] as String,
-      caption: raw["caption"] as String,
-      reactions: parseMany(
-        raw["reactions"] as List<dynamic>,
-        (e) => parseReaction(e as Map<String, Object?>),
-      ),
-      commentsDisabled: raw["commentsDisabled"] as bool,
-      modified: DateTime.parse(raw["modified"] as String),
-      isHighlighted: raw["isHighlighted"] as bool,
-      position: raw["position"] as int,
     );
   }
 

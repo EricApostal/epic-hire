@@ -5,7 +5,7 @@ homepage:
 
 environment:
   sdk: ^3.8.0-70.0.dev
-  flutter: ">=1.17.0"
+  flutter: ">=2.1.0"
 
 dependencies:
   collection: ^1.19.1

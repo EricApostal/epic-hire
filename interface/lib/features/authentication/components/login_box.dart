@@ -6,10 +6,12 @@ class LoginBox extends ConsumerStatefulWidget {
   final String hintText;
   final TextEditingController controller;
   final List<String>? autofillHints;
+  final bool obscureText;
   const LoginBox({
     super.key,
     required this.hintText,
     required this.controller,
+    required this.obscureText,
     this.autofillHints,
   });
 
@@ -32,6 +34,7 @@ class _LoginBoxState extends ConsumerState<LoginBox> {
           style: theme.textTheme.bodyText1,
           controller: widget.controller,
           autofillHints: widget.autofillHints,
+          obscureText: widget.obscureText,
 
           decoration: InputDecoration(
             border: InputBorder.none,

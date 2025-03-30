@@ -1,4 +1,5 @@
 import 'package:wrapper/src/http/managers/user_manager.dart';
+import 'package:wrapper/src/models/company/story.dart';
 import 'package:wrapper/src/models/identified_entity/identified_entity.dart';
 import 'package:wrapper/src/models/school/school.dart';
 
@@ -19,14 +20,14 @@ class User extends PartialUser {
   final String? accountVisiblity;
   final List<dynamic> more;
   final String username;
-  final String imageKey;
+  final String? imageKey;
   final List<UserSchool> userSchools;
   String? jobTitle;
   final String email;
   final String role;
   final dynamic notificationPreferences;
   final String firstName;
-  final List<dynamic> stories;
+  final List<Story> stories;
   final String? businessName;
   final Map<String, dynamic>? meta;
   final List<dynamic> openTo;
@@ -44,7 +45,7 @@ class User extends PartialUser {
     required this.email,
     required this.lastName,
     required this.username,
-    required this.imageKey,
+    this.imageKey,
     required this.userSchools,
     required this.role,
     required this.notificationPreferences,

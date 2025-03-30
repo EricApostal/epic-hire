@@ -31,6 +31,7 @@ export 'src/http/managers/company_manager.dart' show CompanyManager;
 export 'src/http/managers/club_manager.dart' show ClubManager;
 export 'src/http/managers/school_manager.dart' show SchoolManager;
 
+export 'src/models/identified.dart' show Identified;
 export 'src/models/user/user.dart' show PartialUser, User;
 export 'src/models/company/company.dart' show PartialCompany, Company;
 export 'src/models/company/story.dart' show PartialStory, Story;

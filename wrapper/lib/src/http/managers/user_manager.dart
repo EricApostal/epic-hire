@@ -31,7 +31,10 @@ class UserManager extends ReadOnlyManager<User> {
       role: raw["role"] as String,
       notificationPreferences: raw["notificationPreferences"],
       firstName: raw["firstName"] as String,
-      stories: raw["stories"] as List<dynamic>,
+      stories: parseMany(
+        raw["stories"] as List<dynamic>,
+        (e) => client.companies.parseStory(e as Map<String, Object?>),
+      ),
       businessName: raw["businessName"] as String?,
       meta: raw["meta"] as Map<String, dynamic>?,
       openTo: raw["openTo"] as List<dynamic>,
