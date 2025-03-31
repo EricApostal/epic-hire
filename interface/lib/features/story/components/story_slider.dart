@@ -30,6 +30,9 @@ class _StorySliderScreenState extends ConsumerState<StorySliderScreen> {
       indicatorPadding: EdgeInsets.only(
         top: MediaQuery.of(context).viewPadding.top + 4,
       ),
+      onPageLimitReached: () {
+        Navigator.of(context).pop();
+      },
       itemBuilder: (context, pageIndex, storyIndex) {
         return Image.network(
           "https://epic-hire.s3.amazonaws.com/${user.stories[storyIndex].imageKey}",
