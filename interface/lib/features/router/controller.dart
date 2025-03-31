@@ -5,6 +5,7 @@ import 'package:epic_hire/features/home/views/navigation_frame.dart';
 import 'package:epic_hire/features/jobs/views/jobs.dart';
 import 'package:epic_hire/features/story/components/story_slider.dart';
 import 'package:epic_hire/features/user/views/profile.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final routerController = GoRouter(
@@ -48,6 +49,20 @@ final routerController = GoRouter(
           pageBuilder:
               (context, state) =>
                   NoTransitionPage<void>(key: state.pageKey, child: JobsList()),
+        ),
+        GoRoute(
+          path: "/network",
+          pageBuilder:
+              (context, state) => NoTransitionPage<void>(
+                key: state.pageKey,
+                child: Scaffold(
+                  body: Center(
+                    child: Text(
+                      "The network page isn't implemented yet. Sorry about that!",
+                    ),
+                  ),
+                ),
+              ),
         ),
         GoRoute(
           path: "/profile/:userId",

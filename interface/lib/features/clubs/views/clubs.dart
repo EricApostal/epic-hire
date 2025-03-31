@@ -57,7 +57,6 @@ class _ClubsScreenState extends ConsumerState<ClubsScreen> {
           Expanded(
             child: ListView.builder(
               controller: _scrollController,
-              cacheExtent: 1000,
               itemCount: clubs.length,
               padding: EdgeInsets.only(top: 0),
               itemBuilder: (context, index) {
