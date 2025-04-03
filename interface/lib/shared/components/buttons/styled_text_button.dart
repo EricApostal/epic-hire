@@ -1,5 +1,6 @@
 import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class StyledTextButton extends StatefulWidget {
   final void Function() callback;
@@ -28,7 +29,10 @@ class _StyledTextButtonState extends State<StyledTextButton> {
       highlightColor: Colors.transparent,
       focusColor: Colors.transparent,
       hoverColor: Colors.transparent,
-      onTap: widget.callback,
+      onTap: () {
+        HapticFeedback.mediumImpact();
+        widget.callback();
+      },
       child: Container(
         decoration: BoxDecoration(
           color: widget.backgroundColor,

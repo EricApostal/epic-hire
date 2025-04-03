@@ -1,4 +1,5 @@
 import 'package:epic_hire/features/user/repositories/user.dart';
+import 'package:epic_hire/shared/utils/network_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story/story.dart';
@@ -30,9 +31,10 @@ class _StorySliderScreenState extends ConsumerState<StorySliderScreen> {
       indicatorPadding: EdgeInsets.only(
         top: MediaQuery.of(context).viewPadding.top + 4,
       ),
+      onPageLimitReached: () => Navigator.pop(context),
       itemBuilder: (context, pageIndex, storyIndex) {
         return Image.network(
-          "https://epic-hire.s3.amazonaws.com/${user.stories[storyIndex].imageKey}",
+          getUrlFromImageKey(user.stories[storyIndex].imageKey),
           fit: BoxFit.cover,
           loadingBuilder: (context, child, loadingProgress) {
             if (loadingProgress == null) return child;

@@ -18,10 +18,10 @@ class JobCard extends ConsumerStatefulWidget {
 
 class _JobCardState extends ConsumerState<JobCard>
     with SingleTickerProviderStateMixin {
-  late final TabController _tabController = TabController(
-    length: 1,
-    vsync: this,
-  );
+  // late final TabController _tabController = TabController(
+  //   length: 1,
+  //   vsync: this,
+  // );
 
   @override
   Widget build(BuildContext context) {

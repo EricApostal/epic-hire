@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:wrapper/src/http/managers/manager.dart';
 import 'package:wrapper/src/http/request.dart';
 import 'package:wrapper/src/http/route.dart';
@@ -41,6 +43,8 @@ class UserManager extends ReadOnlyManager<User> {
       profileScore: (raw["profileScore"] as int),
       userBadges: raw["userBadges"] as List<dynamic>,
       more: raw["more"] as List<dynamic>,
+      risingStar: raw["risingStar"] as bool,
+      resumeKey: raw["resumeKey"] as String,
     );
   }
 

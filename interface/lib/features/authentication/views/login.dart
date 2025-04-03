@@ -75,7 +75,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 StyledTextButton(
                   "Submit",
                   callback: () async {
-                    final resp = await ref
+                    final _ = await ref
                         .read(authenticationProvider.notifier)
                         .login(
                           usernameController.text,

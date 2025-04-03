@@ -1,6 +1,7 @@
 import 'package:epic_hire/features/authentication/repositories/login.dart';
 import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wrapper/wrapper.dart';
@@ -51,6 +52,7 @@ class UserAvatarState extends ConsumerState<UserAvatar> {
     final client = ref.watch(authenticationProvider).valueOrNull;
     return InkWell(
       onTap: () {
+        HapticFeedback.mediumImpact();
         if (client?.user == null) {
           // logged in as guest
           GoRouter.of(context).go('/login');
@@ -66,7 +68,7 @@ class UserAvatarState extends ConsumerState<UserAvatar> {
           child:
               (widget.user?.imageKey != null)
                   ? Image.network(
-                    "https://epic-hire.s3.amazonaws.com/${widget.user!.imageKey}",
+                    "https://epic-hire.s3.amazonaws.com/${widget.user!.imageKey}?size=64",
                   )
                   : Icon(
                     Icons.account_circle,

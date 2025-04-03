@@ -1,4 +1,5 @@
 import 'package:epic_hire/features/user/repositories/user.dart';
+import 'package:epic_hire/features/user/views/resume.dart';
 import 'package:epic_hire/features/user/views/story_cards.dart';
 import 'package:epic_hire/shared/components/image/fade_in.dart';
 import 'package:epic_hire/theme/theme.dart';
@@ -104,7 +105,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen>
                       controller: _tabController,
                       children: [
                         StoryCardPage(userId: widget.userId),
-                        Text("Resume content for ${user.firstName} goes here."),
+                        ResumeScreen(userId: widget.userId),
                         Text(
                           "Open To content for ${user.firstName} goes here.",
                         ),

@@ -114,7 +114,7 @@ class JobManager extends ReadOnlyManager<Job> {
         raw["locations"] as List<dynamic>,
         (e) => parseLocation(e as Map<String, Object?>),
       ),
-      link: raw["link"] as String,
+      link: raw["link"] as String?,
       attachmentKey: raw["attachmentKey"] as String?,
       ownerId: raw["ownerId"] as int,
       owner: raw["owner"],

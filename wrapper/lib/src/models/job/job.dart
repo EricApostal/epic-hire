@@ -9,7 +9,7 @@ class Job extends PartialJob {
   final List<JobCategory> categories;
   final String type;
   final List<Location> locations;
-  final String link;
+  final String? link;
   final String? attachmentKey;
   final int ownerId;
   final dynamic owner;
@@ -31,7 +31,7 @@ class Job extends PartialJob {
     required this.categories,
     required this.type,
     required this.locations,
-    required this.link,
+    this.link,
     this.attachmentKey,
     required this.ownerId,
     this.owner,

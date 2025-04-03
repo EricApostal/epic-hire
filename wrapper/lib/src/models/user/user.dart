@@ -35,6 +35,8 @@ class User extends PartialUser {
   final String? contactEmail;
   final String? phoneNumber;
   final List<dynamic> userBadges;
+  final bool risingStar;
+  final String? resumeKey;
 
   User({
     required super.id,
@@ -58,6 +60,8 @@ class User extends PartialUser {
     required this.userBadges,
     required this.more,
     this.contactEmail,
+    this.resumeKey,
+    required this.risingStar,
 
     this.phoneNumber,
   });
