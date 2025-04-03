@@ -51,12 +51,15 @@ class _ClubCardState extends ConsumerState<ClubCard> {
             ),
           ),
           if (widget.club.logoKey != null)
-            CustomFadeInWidget(
-              image: Image.network(
-                "https://epic-hire.s3.amazonaws.com/${widget.club.logoKey!}",
-                fit: BoxFit.cover,
-                height: 200,
-                width: double.infinity,
+            SizedBox(
+              height: 200,
+              child: CustomFadeInWidget(
+                image: Image.network(
+                  "https://epic-hire.s3.amazonaws.com/${widget.club.logoKey!}",
+                  fit: BoxFit.cover,
+                  height: 200,
+                  width: double.infinity,
+                ),
               ),
             ),
           Padding(

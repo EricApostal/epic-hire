@@ -42,7 +42,6 @@ class _CompanySummaryListScreenState
 
     return Scaffold(
       body: ListView.builder(
-        cacheExtent: 1000,
         padding: EdgeInsets.only(top: padding.top + 12),
         itemBuilder: (context, index) {
           final company = companies[index];

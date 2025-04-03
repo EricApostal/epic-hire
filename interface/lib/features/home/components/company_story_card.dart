@@ -47,11 +47,14 @@ class _CompanyStoryCardState extends ConsumerState<CompanyStoryCard> {
             const SizedBox(height: 10),
             ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(0)),
-              child: CustomFadeInWidget(
-                image: Image.network(
-                  "https://epic-hire.s3.amazonaws.com/${widget.company.stories.first.imageKey}",
-                  height: 400,
-                  fit: BoxFit.cover,
+              child: SizedBox(
+                height: 400,
+                child: CustomFadeInWidget(
+                  image: Image.network(
+                    "https://epic-hire.s3.amazonaws.com/${widget.company.stories.first.imageKey}",
+                    height: 400,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
