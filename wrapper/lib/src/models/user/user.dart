@@ -1,5 +1,5 @@
 import 'package:wrapper/src/http/managers/user_manager.dart';
-import 'package:wrapper/src/models/company/story.dart';
+import 'package:wrapper/src/models/story/story.dart';
 import 'package:wrapper/src/models/identified_entity/identified_entity.dart';
 import 'package:wrapper/src/models/school/school.dart';
 import 'package:wrapper/src/models/user/open_to.dart';

@@ -1,7 +1,7 @@
-import 'package:runtime_type/runtime_type.dart';
 import 'package:wrapper/src/http/managers/manager.dart';
 import 'package:wrapper/src/http/request.dart';
 import 'package:wrapper/src/http/route.dart';
+import 'package:wrapper/src/models/story/story.dart';
 import 'package:wrapper/src/models/identified.dart';
 import 'package:wrapper/src/models/identified_entity/identified_entity.dart';
 import 'package:wrapper/src/models/user/open_to.dart';
@@ -35,7 +35,7 @@ class UserManager extends ReadOnlyManager<User> {
       notificationPreferences: raw["notificationPreferences"],
       stories: parseMany(
         raw["stories"] as List<dynamic>,
-        (e) => client.companies.parseStory(e as Map<String, Object?>),
+        (e) => client.stories.parse(e as Map<String, Object?>),
       ),
       businessName: raw["businessName"] as String?,
       meta: raw["meta"] as Map<String, dynamic>?,
@@ -94,5 +94,26 @@ class UserManager extends ReadOnlyManager<User> {
 
     client.updateCacheWith(user);
     return user;
+  }
+
+  Future<List<Story>> fetchHomePage() async {
+    final route = HttpRoute()..homeFeed();
+    final request = BasicRequest(
+      route,
+      3,
+      queryParameters: {'page': "0", 'limit': "6"},
+    );
+
+    final response = await client.httpHandler.executeSafe(request);
+    final stories = parseMany((response.jsonBody["data"]) as List<dynamic>, (
+      Map<String, dynamic> e,
+    ) {
+      final mapped = e["story"];
+      // the api for this is pretty unintuitive, so I'd rather just reformat the model
+      mapped["poster"] = e["poster"];
+      return client.stories.parse(mapped);
+    });
+
+    return stories;
   }
 }

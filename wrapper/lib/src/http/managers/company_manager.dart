@@ -2,13 +2,13 @@ import 'package:wrapper/src/http/managers/manager.dart';
 import 'package:wrapper/src/http/request.dart';
 import 'package:wrapper/src/http/route.dart';
 import 'package:wrapper/src/models/company/company.dart';
-import 'package:wrapper/src/models/company/story.dart';
+import 'package:wrapper/src/models/story/story.dart';
 import 'package:wrapper/src/models/identified.dart';
 import 'package:wrapper/src/models/identified_entity/identified_entity.dart';
 import 'package:wrapper/src/utils/cache_helpers.dart';
 import 'package:wrapper/src/utils/parsing_helpers.dart';
 
-/// A manager for [User]s.
+/// A manager for [Company]s.
 class CompanyManager extends ReadOnlyManager<Company> {
   /// Create a new [CompanyManager].
   CompanyManager(super.config, super.client) : super(identifier: 'companies');
@@ -48,7 +48,7 @@ class CompanyManager extends ReadOnlyManager<Company> {
       followers: raw["followers"] as int,
       stories: parseMany(
         raw["stories"] as List<dynamic>,
-        (e) => parseStory(e as Map<String, Object?>),
+        (e) => client.stories.parse(e as Map<String, Object?>),
       ),
       jobCategories: parseMany(
         raw["jobCategories"] as List<dynamic>,
@@ -63,20 +63,6 @@ class CompanyManager extends ReadOnlyManager<Company> {
       industry: raw["industry"],
       userBadges: List<dynamic>.from(raw["userBadges"] as List),
       signedInUserIsAdmin: raw["signedInUserIsAdmin"] as bool,
-    );
-  }
-
-  Story parseStory(Map<String, Object?> raw) {
-    return Story(
-      id: Identified(raw["id"] as int),
-      created: DateTime.parse(raw["created"] as String),
-      imageKey: raw["imageKey"] as String,
-      reactions: raw["reactions"] as List<dynamic>,
-      caption: raw["caption"] as String,
-      commentsDisabled: raw["captionsDisabled"] as bool? ?? false,
-      modified: DateTime.parse(raw["modified"] as String),
-      isHighlighted: raw["isHighlighted"] as bool,
-      position: raw["position"] as int,
     );
   }
 

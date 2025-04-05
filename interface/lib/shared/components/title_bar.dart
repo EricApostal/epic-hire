@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:epic_hire/features/authentication/repositories/login.dart';
+import 'package:epic_hire/shared/utils/network_key.dart';
 import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,33 +10,42 @@ import 'package:go_router/go_router.dart';
 import 'package:wrapper/wrapper.dart';
 
 class TitleBar extends ConsumerWidget {
-  final String titleName;
+  final Widget title;
   final List<Widget>? extraItems;
-  const TitleBar(this.titleName, {super.key, this.extraItems});
+  const TitleBar(this.title, {super.key, this.extraItems});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewPadding = MediaQuery.of(context).padding;
     final client = ref.watch(authenticationProvider).valueOrNull;
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Theme.of(context).custom.colorTheme.foreground,
-      ),
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(24, viewPadding.top + 12, 24, 12),
-        child: Row(
-          children: [
-            Text(
-              titleName,
-              style: Theme.of(context).custom.textTheme.titleMedium,
+    return Column(
+      children: [
+        ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 6, sigmaY: 4),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(
+                  context,
+                ).scaffoldBackgroundColor.withOpacity(0.5),
+              ),
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(24, viewPadding.top + 12, 24, 12),
+                child: Row(
+                  children: [
+                    title,
+                    Spacer(),
+                    ...extraItems ?? [],
+                    UserAvatar(user: client?.user as User?),
+                  ],
+                ),
+              ),
             ),
-            Spacer(),
-            ...extraItems ?? [],
-            UserAvatar(user: client?.user as User?),
-          ],
+          ),
         ),
-      ),
+        Container(),
+      ],
     );
   }
 }
@@ -68,7 +80,7 @@ class UserAvatarState extends ConsumerState<UserAvatar> {
           child:
               (widget.user?.imageKey != null)
                   ? Image.network(
-                    "https://epic-hire.s3.amazonaws.com/${widget.user!.imageKey}?size=64",
+                    getUrlFromImageKey(widget.user!.imageKey!, width: 128),
                   )
                   : Icon(
                     Icons.account_circle,

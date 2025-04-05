@@ -4,6 +4,7 @@ import 'package:wrapper/src/http/managers/club_manager.dart';
 import 'package:wrapper/src/http/managers/job_manager.dart';
 import 'package:wrapper/src/http/managers/school_manager.dart';
 import 'package:wrapper/src/http/managers/company_manager.dart';
+import 'package:wrapper/src/http/managers/story_manager.dart';
 import 'package:wrapper/src/http/managers/user_manager.dart';
 
 /// An internal mixin to add managers to a [Wrapper] instance.
@@ -27,17 +28,6 @@ mixin ManagerMixin implements Wrapper {
   JobManager get jobs =>
       JobManager(options.jobCacheConfig, this as WrapperRest);
 
-  // /// A [ChannelManager] that manages channels for this client.
-  // ChannelManager get channels =>
-  //     ChannelManager(options.channelCacheConfig, this as WrapperRest);
-
-  // /// A [GuildManager] that manages guilds for this client.
-  // GuildManager get guilds =>
-  //     GuildManager(options.guildCacheConfig, this as WrapperRest);
-
-  // /// An [InviteManager] that manages invites for this client.
-  // InviteManager get invites => InviteManager(this as WrapperRest);
-
-  // /// A [GatewayManager] that manages gateway metadata for this client.
-  // GatewayManager get gateway => GatewayManager(this as WrapperRest);
+  StoryManager get stories =>
+      StoryManager(options.storyCacheConfig, this as WrapperRest);
 }

@@ -3,6 +3,7 @@ import 'package:epic_hire/features/user/views/open_to.dart';
 import 'package:epic_hire/features/user/views/resume.dart';
 import 'package:epic_hire/features/user/views/story_cards.dart';
 import 'package:epic_hire/shared/components/image/fade_in.dart';
+import 'package:epic_hire/shared/utils/network_key.dart';
 import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -45,12 +46,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen>
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ClipOval(
-                    child: CustomFadeInWidget(
-                      image: Image.network(
-                        width: 100,
-                        height: 100,
-                        "https://epic-hire.s3.amazonaws.com/${user.imageKey!}",
+                  SizedBox(
+                    width: 100,
+                    child: ClipOval(
+                      child: CustomFadeInWidget(
+                        image: Image.network(
+                          width: 100,
+                          height: 100,
+                          getUrlFromImageKey(user.imageKey!, width: 256),
+                        ),
                       ),
                     ),
                   ),
