@@ -69,7 +69,7 @@ class UserAvatarState extends ConsumerState<UserAvatar> {
           // logged in as guest
           GoRouter.of(context).go('/login');
         } else {
-          GoRouter.of(context).go('/profile/${widget.user!.id}');
+          GoRouter.of(context).push('/profile/${widget.user!.id}');
         }
       },
 

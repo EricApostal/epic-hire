@@ -24,13 +24,19 @@ class _JobsListState extends ConsumerState<JobsList> {
     if (jobs == null) {
       return Scaffold(body: Center(child: CircularProgressIndicator()));
     }
+
     return Scaffold(
       body: ListView.builder(
         padding: const EdgeInsets.only(top: 0),
         itemCount: jobs.length,
         itemBuilder: (context, index) {
           final job = jobs[index];
-          return JobCard(job, isFirstCard: index == 0);
+          return Column(
+            // TODO: isFirstCard is old code from a old design I had.
+            // This logic should be moved back to the listview, unless
+            // we create a new design that requires it.
+            children: [JobCard(job, isFirstCard: index == 0), Divider()],
+          );
         },
       ),
     );
