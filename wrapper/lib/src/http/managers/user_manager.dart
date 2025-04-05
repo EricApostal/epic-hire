@@ -1,10 +1,10 @@
-import 'dart:typed_data';
-
+import 'package:runtime_type/runtime_type.dart';
 import 'package:wrapper/src/http/managers/manager.dart';
 import 'package:wrapper/src/http/request.dart';
 import 'package:wrapper/src/http/route.dart';
 import 'package:wrapper/src/models/identified.dart';
 import 'package:wrapper/src/models/identified_entity/identified_entity.dart';
+import 'package:wrapper/src/models/user/open_to.dart';
 import 'package:wrapper/src/models/user/user.dart';
 import 'package:wrapper/src/utils/cache_helpers.dart';
 import 'package:wrapper/src/utils/parsing_helpers.dart';
@@ -20,6 +20,7 @@ class UserManager extends ReadOnlyManager<User> {
       manager: this,
       id: Identified(raw["id"] as int),
       permissions: raw["permissions"] as List<dynamic>,
+      firstName: raw["firstName"] as String,
       lastName: raw["lastName"] as String,
       accountStatus: raw["accountStatus"] as String,
       accountVisiblity: raw["accountVisiblity"] as String?,
@@ -32,19 +33,42 @@ class UserManager extends ReadOnlyManager<User> {
       ),
       role: raw["role"] as String,
       notificationPreferences: raw["notificationPreferences"],
-      firstName: raw["firstName"] as String,
       stories: parseMany(
         raw["stories"] as List<dynamic>,
         (e) => client.companies.parseStory(e as Map<String, Object?>),
       ),
       businessName: raw["businessName"] as String?,
       meta: raw["meta"] as Map<String, dynamic>?,
-      openTo: raw["openTo"] as List<dynamic>,
+      openTo: parseMany(
+        raw["openTo"] as List<dynamic>,
+        (e) => parseOpenTo(e as Map<String, Object?>),
+      ),
       profileScore: (raw["profileScore"] as int),
       userBadges: raw["userBadges"] as List<dynamic>,
       more: raw["more"] as List<dynamic>,
       risingStar: raw["risingStar"] as bool,
       resumeKey: raw["resumeKey"] as String,
+    );
+  }
+
+  OpenTo parseOpenTo(Map<String, Object?> raw) {
+    return OpenTo(
+      id: Identified.parse(raw["id"] as int),
+      type: raw["type"] as String,
+      mongoObjectId: raw["mongoObjectId"] as String?,
+      locations: parseMany(
+        raw["locations"] as List<dynamic>,
+        (Map<String, Object?> raw) => client.jobs.parseLocation(raw),
+      ),
+      jobCategories: parseMany(
+        raw["jobCategories"] as List<dynamic>,
+        (Map<String, Object?> raw) => client.jobs.parseJobCategory(raw),
+      ),
+      internshipTimeFrame: raw["internshipTimeFrame"] as String,
+      jobEnvironments: List<String>.from(
+        raw["jobEnvironments"] as List<dynamic>,
+      ),
+      jobTypes: List<String>.from(raw["jobTypes"] as List<dynamic>),
     );
   }
 

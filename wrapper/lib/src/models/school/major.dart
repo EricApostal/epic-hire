@@ -1,41 +1,20 @@
-import 'package:wrapper/src/models/identified_entity/identified_entity.dart';
-import 'package:wrapper/wrapper.dart';
+import 'package:wrapper/src/models/identified.dart';
+import 'package:wrapper/src/utils/to_string_helper/base_impl.dart';
 
-class Major extends IdentifiedEntity<School> {
+class Major with ToStringHelper {
+  final Identified id;
+
   /// The name of the major.
   final String name;
 
   final String mongoObjectId;
 
   /// Create a new [Major].
-  Major({required super.id, required this.name, required this.mongoObjectId});
-
-  @override
-  Future<School> fetch() {
-    // TODO: implement fetch
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<School> get() {
-    // TODO: implement get
-    throw UnimplementedError();
-  }
+  Major({required this.id, required this.name, required this.mongoObjectId});
 }
 
-class MajorCategory extends IdentifiedEntity<School> {
+class MajorCategory with ToStringHelper {
+  final Identified id;
   final String name;
-  MajorCategory({required super.id, required this.name});
-
-  @override
-  Future<School> fetch() {
-    // TODO: implement fetch
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<School> get() {
-    // TODO: implement get
-    throw UnimplementedError();
-  }
+  MajorCategory({required this.id, required this.name});
 }

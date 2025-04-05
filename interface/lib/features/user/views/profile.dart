@@ -1,4 +1,5 @@
 import 'package:epic_hire/features/user/repositories/user.dart';
+import 'package:epic_hire/features/user/views/open_to.dart';
 import 'package:epic_hire/features/user/views/resume.dart';
 import 'package:epic_hire/features/user/views/story_cards.dart';
 import 'package:epic_hire/shared/components/image/fade_in.dart';
@@ -106,9 +107,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen>
                       children: [
                         StoryCardPage(userId: widget.userId),
                         ResumeScreen(userId: widget.userId),
-                        Text(
-                          "Open To content for ${user.firstName} goes here.",
-                        ),
+                        OpenToScreen(userId: widget.userId),
                       ],
                     ),
                   ),

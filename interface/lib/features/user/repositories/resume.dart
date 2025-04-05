@@ -1,6 +1,5 @@
 import 'package:epic_hire/features/authentication/repositories/login.dart';
 import 'package:epic_hire/features/user/repositories/user.dart';
-import 'package:epic_hire/shared/utils/network_key.dart';
 import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

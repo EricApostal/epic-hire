@@ -2,6 +2,7 @@ import 'package:wrapper/src/http/managers/user_manager.dart';
 import 'package:wrapper/src/models/company/story.dart';
 import 'package:wrapper/src/models/identified_entity/identified_entity.dart';
 import 'package:wrapper/src/models/school/school.dart';
+import 'package:wrapper/src/models/user/open_to.dart';
 
 /// A partial [User] object.
 class PartialUser extends ManagedIdentifiedEntity<User> {
@@ -30,7 +31,7 @@ class User extends PartialUser {
   final List<Story> stories;
   final String? businessName;
   final Map<String, dynamic>? meta;
-  final List<dynamic> openTo;
+  final List<OpenTo> openTo;
   final int profileScore;
   final String? contactEmail;
   final String? phoneNumber;

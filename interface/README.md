@@ -1,3 +1,3 @@
-# epic_hire
+# Epic Hire
 
-A new Flutter project.
+The interface portion to the Epic Hire app.
