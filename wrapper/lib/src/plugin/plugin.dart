@@ -21,7 +21,7 @@ abstract class WrapperPlugin<ClientType extends Wrapper> {
   /// The type of client this plugin requires.
   RuntimeType<ClientType> get clientType => RuntimeType<ClientType>();
 
-  late final Expando<NyxxPluginState<ClientType, WrapperPlugin<ClientType>>>
+  late final Expando<WrapperPluginState<ClientType, WrapperPlugin<ClientType>>>
   _states = Expando('$name plugin states');
 
   /// Perform the connection operation.
@@ -61,8 +61,8 @@ abstract class WrapperPlugin<ClientType extends Wrapper> {
   ///
   /// Each plugin creates a state for each client is attached to. States can contain mutable fields that can be updated at any time without affecting other
   /// instances of the plugin attached to other clients.
-  FutureOr<NyxxPluginState<ClientType, WrapperPlugin<ClientType>>>
-  createState() => NyxxPluginState(this);
+  FutureOr<WrapperPluginState<ClientType, WrapperPlugin<ClientType>>>
+  createState() => WrapperPluginState(this);
 
   /// {@template before_connect}
   /// Called before each client this plugin is added to connects.
@@ -104,7 +104,7 @@ abstract class WrapperPlugin<ClientType extends Wrapper> {
 }
 
 /// Holds the state of a plugin added to a client.
-class NyxxPluginState<
+class WrapperPluginState<
   ClientType extends Wrapper,
   PluginType extends WrapperPlugin<ClientType>
 > {
@@ -115,7 +115,7 @@ class NyxxPluginState<
   Logger get logger => plugin.logger;
 
   /// Create a new plugin state.
-  NyxxPluginState(this.plugin);
+  WrapperPluginState(this.plugin);
 
   /// {@macro before_connect}
   @mustCallSuper

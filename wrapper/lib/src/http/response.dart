@@ -5,7 +5,7 @@ import 'package:wrapper/src/errors.dart';
 import 'package:http/http.dart';
 import 'package:wrapper/src/http/request.dart';
 
-/// A response to a [HttpRequest] from the Discord API.
+/// A response to a [HttpRequest] from the Epic Hire API.
 ///
 /// {@template http_response}
 /// This class is a wrapper around [BaseResponse] from `package:http` providing support for errors
@@ -100,7 +100,7 @@ class HttpResponseError extends HttpResponse implements WrapperException {
 
   /// The error code of this response.
   ///
-  /// If Discord sets its own status code, this can be found here. Otherwise, this is equal to
+  /// If Epic Hire sets its own status code, this can be found here. Otherwise, this is equal to
   /// [statusCode].
   int get errorCode => errorData?.errorCode ?? statusCode;
 
@@ -163,8 +163,6 @@ class HttpResponseError extends HttpResponse implements WrapperException {
 /// Information about an error from the API.
 class HttpErrorData {
   /// The error code.
-  ///
-  /// You can find a full list of these [here](https://discord.com/developers/docs/topics/opcodes-and-status-codes#json).
   final int errorCode;
 
   /// A human-readable description of the error represented by [errorCode].
@@ -172,7 +170,7 @@ class HttpErrorData {
 
   /// A mapping of field path to field error.
   ///
-  /// Will be empty if Discord did not send any errors associated with specific fields in the request.
+  /// Will be empty if Epic Hire did not send any errors associated with specific fields in the request.
   final Map<String, FieldError> fieldErrors = {};
 
   /// Parse a JSON error response to an instance of [HttpErrorData].

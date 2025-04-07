@@ -3,26 +3,24 @@ class Identified implements Comparable<Identified> {
   /// A snowflake with a value of 0.
   static final zero = Identified(0);
 
-  /// The value of this snowflake.
-  ///
-  /// While this is stored in a signed [int], Discord treats this as an unsigned value.
+  /// The value of this identified entity.
   final num value;
 
   /// Whether this snowflake has a value of `0`.
   bool get isZero => value == 0;
 
-  /// Create a new snowflake from an integer value.
+  /// Create a new identified entity from an integer value.
   ///
-  /// {@macro snowflake}
+  /// {@macro identified}
   const Identified(this.value);
 
-  /// Parse a string or integer value to a snowflake.
+  /// Parse a string or integer value to an identified entity.
   ///
-  /// Both data types are accepted as Discord's Gateway can transmit Identifieds as strings or integers when using the [GatewayPayloadFormat.etf] payload format.
+  /// Both data types are accepted as Epic Hire's Gateway can transmit Identifieds as strings or integers when using the [GatewayPayloadFormat.etf] payload format.
   ///
   /// The [value] must be an [int] or a [String] parsable by [int.parse].
   ///
-  /// {@macro snowflake}
+  /// {@macro identified}
 
   // We need to parse the unsigned [value] into a signed [int].
   factory Identified.parse(Object /* String | int */ value) {

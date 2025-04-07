@@ -63,7 +63,7 @@ extension InternalReady on Wrapper {
   Future<void> get initialized => _initializedCompleter.future;
 }
 
-/// The base class for clients interacting with the Discord API.
+/// The base class for clients interacting with the Epic Hire API.
 abstract class Wrapper {
   /// The options this client will use when connecting to the API.
   ApiOptions get apiOptions;

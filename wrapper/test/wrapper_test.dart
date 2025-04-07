@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:wrapper/src/client_options.dart';
 
 import 'package:wrapper/wrapper.dart';
 
@@ -6,7 +7,7 @@ void main() async {
   // test('connect to the client', () async {
   //   final client = await Wrapper.connectRest(
   //     '',
-  //     options: GatewayClientOptions(
+  //     options: WrapperClientOptions(
   //       plugins: [Logging(logLevel: Level.ALL), cliIntegration],
   //     ),
   //   );
@@ -15,7 +16,7 @@ void main() async {
   // });
 
   final client = await Wrapper.connectRest(
-    options: GatewayClientOptions(
+    options: WrapperClientOptions(
       plugins: [Logging(logLevel: Level.ALL), cliIntegration],
     ),
   );

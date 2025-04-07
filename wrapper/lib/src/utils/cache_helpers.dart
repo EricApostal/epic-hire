@@ -17,7 +17,7 @@ extension CacheUpdates on WrapperRest {
             'Tried to update cache for ${entity.runtimeType}, but that type was not handled.',
           )
           ..info(
-            'This is a bug, please report it to https://github.com/nyxx-discord/nyxx/issues or on our Discord server. Your client will still work regardless, so you can also ignore this message.',
+            'This is a bug! Your client will still work regardless, so you can also ignore this message.',
           );
         return true;
       }());

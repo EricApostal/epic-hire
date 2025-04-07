@@ -12,7 +12,7 @@ class HttpRoute {
   /// This includes the names and parameters of this [parts].
   Iterable<String> get segments => parts.expand((part) => part.segments);
 
-  /// The path this [HttpRoute] represents, relative to Discord's root API URL.
+  /// The path this [HttpRoute] represents, relative to Epic Hire's root API URL.
   String get path => '/${segments.join('/')}';
 
   /// An id used for rate limiting.

@@ -2,7 +2,6 @@ import 'package:wrapper/src/http/managers/manager.dart';
 import 'package:wrapper/src/http/request.dart';
 import 'package:wrapper/src/http/route.dart';
 import 'package:wrapper/src/models/company/company.dart';
-import 'package:wrapper/src/models/story/story.dart';
 import 'package:wrapper/src/models/identified.dart';
 import 'package:wrapper/src/models/identified_entity/identified_entity.dart';
 import 'package:wrapper/src/utils/cache_helpers.dart';

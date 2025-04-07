@@ -21,7 +21,7 @@ extension on HttpRequest {
 typedef RateLimitInfo =
     ({HttpRequest request, Duration delay, bool isGlobal, bool isAnticipated});
 
-/// A handler for making HTTP requests to the Discord API.
+/// A handler for making HTTP requests to the Epic Hire API.
 ///
 /// {@template http_handler}
 /// HTTP requests can be made using the [execute] method. Rate limiting is anticipated and requests
@@ -93,7 +93,7 @@ class HttpHandler {
 
   /// The average network and API latency of the last 10 requests.
   ///
-  /// This time measures how long each request takes to get a response from Discord's API, regardless of holding or retries due to rate limiting. This is not an
+  /// This time measures how long each request takes to get a response from Epic Hires's API, regardless of holding or retries due to rate limiting. This is not an
   /// indicator of how long each call to [execute] takes to complete.
   ///
   /// If no requests have been completed, this getter returns [Duration.zero].
@@ -135,7 +135,7 @@ class HttpHandler {
     logger
       ..fine(request.loggingId)
       ..finer(
-        'Rate Limit ID: ${request.rateLimitId}, Headers: ${request.headers}, Audit Log Reason: ${request.auditLogReason},'
+        'Rate Limit ID: ${request.rateLimitId}, Headers: ${request.headers},'
         ' Apply Global Rate Limit: ${request.applyGlobalRateLimit}',
       );
 

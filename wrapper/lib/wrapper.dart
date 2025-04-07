@@ -1,13 +1,6 @@
-export 'src/api_options.dart'
-    show
-        ApiOptions,
-        RestApiOptions,
-        GatewayApiOptions,
-        GatewayCompression,
-        GatewayPayloadFormat;
+export 'src/api_options.dart' show ApiOptions, RestApiOptions;
 export 'src/client.dart' show Wrapper, WrapperRest;
-export 'src/client_options.dart'
-    show ClientOptions, RestClientOptions, GatewayClientOptions;
+export 'src/client_options.dart' show ClientOptions, RestClientOptions;
 export 'src/errors.dart' show InvalidEventException, PluginError;
 
 export 'src/builders/builder.dart' show Builder, CreateBuilder, UpdateBuilder;
@@ -46,13 +39,13 @@ export 'src/models/job/location.dart' show Location;
 export 'src/models/job/media.dart' show JobMedia;
 export 'src/models/job/reaction.dart' show Reaction;
 
-export 'src/plugin/plugin.dart' show WrapperPlugin, NyxxPluginState;
+export 'src/plugin/plugin.dart' show WrapperPlugin, WrapperPluginState;
 export 'src/plugin/logging.dart' show Logging, logging;
 export 'src/plugin/cli_integration.dart' show CliIntegration, cliIntegration;
 export 'src/plugin/ignore_exceptions.dart'
     show IgnoreExceptions, ignoreExceptions;
 
-// Types also used in the nyxx API from other packages
+// Types also used in the wrapper API from other packages
 export 'package:http/http.dart'
         // Don't export MultipartRequest as it conflicts with our MultipartRequest
         show

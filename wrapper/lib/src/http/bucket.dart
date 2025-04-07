@@ -5,15 +5,8 @@ import 'package:wrapper/src/http/request.dart';
 /// A rate limit bucket tracking requests.
 ///
 /// {@template http_bucket}
-/// Every response from Discord's API contains headers to handle rate limiting. This class keeps
-/// track of these headers in a single rate limit bucket (identified by the [xRateLimitBucket]
-/// header) and allows the client to anticipate rate limits.
-///
-/// Every [HttpHandler] stores a map of [HttpRoute.rateLimitId] to [HttpBucket] and implicitly
-/// checks each request before sending it, waiting if a rate limit would be exceeded.
-///
-/// External references:
-/// * Discord API Reference: https://discord.com/developers/docs/topics/rate-limits#rate-limits
+/// This was recycled from the Nyxx Discord bot library. It's my understanding that ratelimiting
+/// is not a feature of the epic hire API, however, it should be easy to implement from this.
 /// {@endtemplate}
 class HttpBucket {
   /// The name of the header containing the rate limit bucket id.

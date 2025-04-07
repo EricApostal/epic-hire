@@ -3,7 +3,6 @@ import 'package:epic_hire/features/home/repositories/home_feed.dart';
 import 'package:epic_hire/features/home/views/home_feed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wrapper/wrapper.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -19,7 +18,6 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
     homeFeed.when(
       data: (data) {},
       error: (e, st) {
-        print("shit fucked uo, errr");
         print(e);
         print(st);
       },

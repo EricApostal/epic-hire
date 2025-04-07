@@ -8,7 +8,7 @@ import 'package:wrapper/src/models/user/user.dart';
 import 'package:wrapper/src/plugin/plugin.dart';
 import 'package:logging/logging.dart';
 
-/// Options for controlling the behavior of a [Nyxx] client.
+/// Options for controlling the behavior of a [Wrapper] client.
 abstract class ClientOptions {
   /// The plugins to use for this client.
   final List<WrapperPlugin> plugins;
@@ -23,21 +23,21 @@ abstract class ClientOptions {
   const ClientOptions({this.plugins = const [], this.loggerName = 'Wrapper'});
 }
 
-/// Options for controlling the behavior of a [NyxxRest] client.
+/// Options for controlling the behavior of a [WrapperRest] client.
 class RestClientOptions extends ClientOptions {
-  /// The [CacheConfig] to use for the cache of the [NyxxRest.users] manager.
+  /// The [CacheConfig] to use for the cache of the [WrapperRest.users] manager.
   final CacheConfig<User> userCacheConfig;
 
-  /// The [CacheConfig] to use for the cache of the [NyxxRest.companies] manager.
+  /// The [CacheConfig] to use for the cache of the [WrapperRest.companies] manager.
   final CacheConfig<Company> companyCacheConfig;
 
-  /// The [CacheConfig] to use for the cache of the [NyxxRest.schools] manager.
+  /// The [CacheConfig] to use for the cache of the [WrapperRest.schools] manager.
   final CacheConfig<School> schoolCacheConfig;
 
-  /// The [CacheConfig] to use for the cache of the [NyxxRest.clubs] manager.
+  /// The [CacheConfig] to use for the cache of the [WrapperRest.clubs] manager.
   final CacheConfig<Club> clubCacheConfig;
 
-  /// The [CacheConfig] to use for the cache of the [NyxxRest.jobs] manager.
+  /// The [CacheConfig] to use for the cache of the [WrapperRest.jobs] manager.
   final CacheConfig<Job> jobCacheConfig;
 
   final CacheConfig<Story> storyCacheConfig;
@@ -55,19 +55,8 @@ class RestClientOptions extends ClientOptions {
   });
 }
 
-/// Options for controlling the behavior of a [NyxxGateway] client.
-class GatewayClientOptions extends RestClientOptions {
-  /// The minimum number of session starts this client needs to connect.
-  ///
-  /// This is a safety feature to avoid API bans due to excessive connection starts.
-  ///
-  /// If the remaining number of session starts is below this number, an error will be thrown when connecting.
-  final int minimumSessionStarts;
-
+/// Options for controlling the behavior of a [Wrapper] client.
+class WrapperClientOptions extends RestClientOptions {
   /// Create a new [GatewayClientOptions].
-  const GatewayClientOptions({
-    this.minimumSessionStarts = 10,
-    super.plugins,
-    super.loggerName,
-  });
+  const WrapperClientOptions({super.plugins, super.loggerName});
 }
