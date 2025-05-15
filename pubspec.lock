@@ -1152,7 +1152,7 @@ packages:
   wrapper:
     dependency: "direct main"
     description:
-      path: "../wrapper"
+      path: "packages/wrapper"
       relative: true
     source: path
     version: "0.0.1"
