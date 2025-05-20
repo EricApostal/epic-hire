@@ -77,16 +77,15 @@ class UserAvatarState extends ConsumerState<UserAvatar> {
         child: SizedBox(
           width: 36,
           height: 36,
-          child:
-              (widget.user?.imageKey != null)
-                  ? Image.network(
-                    getUrlFromImageKey(widget.user!.imageKey!, width: 128),
-                  )
-                  : Icon(
-                    Icons.account_circle,
-                    size: 36,
-                    color: Theme.of(context).custom.colorTheme.dirtywhite,
-                  ),
+          child: (widget.user?.imageKey != null)
+              ? Image.network(
+                  getUrlFromImageKey(widget.user!.imageKey!, width: 128),
+                )
+              : Icon(
+                  Icons.account_circle,
+                  size: 36,
+                  color: EpicHireTheme.of(context).dirtyWhite,
+                ),
         ),
       ),
     );

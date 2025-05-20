@@ -60,10 +60,10 @@ class _BarWidgetState extends ConsumerState<NavigationBarWidget> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).custom.colorTheme.background,
+            color: EpicHireTheme.of(context).background,
             border: Border(
               top: BorderSide(
-                color: Theme.of(context).custom.colorTheme.foreground,
+                color: EpicHireTheme.of(context).foreground,
                 width: 1,
               ),
             ),
@@ -100,7 +100,7 @@ class _BarWidgetState extends ConsumerState<NavigationBarWidget> {
         ),
         Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).custom.colorTheme.background,
+            color: EpicHireTheme.of(context).background,
           ),
           height: MediaQuery.of(context).padding.bottom,
         ),
@@ -130,12 +130,9 @@ class NavigatorIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color =
-        selected
-            ? Theme.of(context).custom.colorTheme.dirtywhite
-            : Theme.of(
-              context,
-            ).custom.colorTheme.dirtywhite.withValues(alpha: 0.3);
+    final color = selected
+        ? EpicHireTheme.of(context).dirtyWhite
+        : EpicHireTheme.of(context).dirtyWhite.withValues(alpha: 0.3);
 
     return OutlinedButton(
       onPressed: () {
@@ -144,7 +141,7 @@ class NavigatorIcon extends StatelessWidget {
       },
       style: OutlinedButton.styleFrom(
         minimumSize: Size.zero,
-        foregroundColor: Theme.of(context).custom.colorTheme.foreground,
+        foregroundColor: EpicHireTheme.of(context).foreground,
         padding: const EdgeInsets.all(16),
         side: const BorderSide(color: Colors.transparent, width: 0),
         shape: RoundedRectangleBorder(
@@ -161,17 +158,15 @@ class NavigatorIcon extends StatelessWidget {
             ),
             if (label != null)
               DefaultTextStyle(
-                style: Theme.of(context).custom.textTheme.subtitle2.copyWith(
-                  fontSize: 9,
-                  color: color,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.labelSmall!.copyWith(fontSize: 9, color: color),
                 child: Text(
                   label!,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).custom.textTheme.subtitle2.copyWith(
-                    fontSize: 9,
-                    color: color,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.labelSmall!.copyWith(fontSize: 9, color: color),
                 ),
               ),
           ],

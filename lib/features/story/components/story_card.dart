@@ -48,7 +48,7 @@ class _StoryCardState extends ConsumerState<StoryCard> {
                     children: [
                       Text(
                         widget.story.poster!.name,
-                        style: Theme.of(context).custom.textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       if (widget.story.poster!.descriptor != null)
                         Text(

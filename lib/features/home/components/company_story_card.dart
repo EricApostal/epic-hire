@@ -15,14 +15,12 @@ class CompanyStoryCard extends ConsumerStatefulWidget {
 class _CompanyStoryCardState extends ConsumerState<CompanyStoryCard> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).custom;
+    final theme = Theme.of(context);
     String caption = widget.company.stories.first.caption;
     if (caption == "") caption = "View more";
 
     return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).custom.colorTheme.background,
-      ),
+      decoration: BoxDecoration(color: EpicHireTheme.of(context).background),
       child: Padding(
         padding: EdgeInsets.only(bottom: 0, top: 0),
         child: Column(
@@ -41,7 +39,7 @@ class _CompanyStoryCardState extends ConsumerState<CompanyStoryCard> {
                     ),
                   ),
                 SizedBox(width: 10),
-                Text(widget.company.name, style: theme.textTheme.bodyText1),
+                Text(widget.company.name, style: theme.textTheme.bodyMedium),
               ],
             ),
             const SizedBox(height: 10),
@@ -70,7 +68,7 @@ class _CompanyStoryCardState extends ConsumerState<CompanyStoryCard> {
                   //       style: OutlinedButton.styleFrom(
                   //         minimumSize: Size.zero,
                   //         foregroundColor:
-                  //             Theme.of(context).custom.colorTheme.dirtywhite,
+                  //             EpicHireTheme.of(context).dirtyWhite,
                   //         padding: const EdgeInsets.only(
                   //           top: 12,
                   //           bottom: 12,
@@ -88,7 +86,7 @@ class _CompanyStoryCardState extends ConsumerState<CompanyStoryCard> {
                   //       child: Icon(
                   //         Icons.forum_rounded,
                   //         size: 28,
-                  //         color: theme.colorTheme.dirtywhite,
+                  //         color: theme.colorTheme.dirtyWhite,
                   //       ),
                   //     ),
                   //   ],
@@ -96,8 +94,7 @@ class _CompanyStoryCardState extends ConsumerState<CompanyStoryCard> {
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       minimumSize: Size.zero,
-                      foregroundColor:
-                          Theme.of(context).custom.colorTheme.dirtywhite,
+                      foregroundColor: EpicHireTheme.of(context).dirtyWhite,
                       padding: const EdgeInsets.only(
                         top: 12,
                         bottom: 12,
@@ -132,7 +129,7 @@ class _CompanyStoryCardState extends ConsumerState<CompanyStoryCard> {
                 ],
               ),
             ),
-            Divider(color: Theme.of(context).custom.colorTheme.dirtywhite),
+            Divider(color: EpicHireTheme.of(context).dirtyWhite),
           ],
         ),
       ),

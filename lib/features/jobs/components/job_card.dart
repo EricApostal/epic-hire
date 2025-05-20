@@ -19,7 +19,8 @@ class _JobCardState extends ConsumerState<JobCard>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).custom;
+    final theme = Theme.of(context);
+    final epicHireTheme = EpicHireTheme.of(context);
     List<Widget> locations = [];
     for (final location in widget.job.locations) {
       String text = "${location.locality}, ${location.administrativeArea}";
@@ -29,14 +30,13 @@ class _JobCardState extends ConsumerState<JobCard>
       locations.add(
         Text(
           text,
-          style: theme.textTheme.bodyText1.copyWith(
-            color: theme.colorTheme.dirtywhite.withOpacity(0.9),
+          style: theme.textTheme.bodyMedium!.copyWith(
+            color: epicHireTheme.dirtyWhite.withOpacity(0.9),
           ),
         ),
       );
     }
 
-    print(widget.job.category?.name);
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(0)),
@@ -64,9 +64,9 @@ class _JobCardState extends ConsumerState<JobCard>
 
               Text(
                 widget.job.company.name,
-                style: theme.textTheme.caption.copyWith(
+                style: theme.textTheme.labelSmall!.copyWith(
                   fontWeight: FontWeight.w600,
-                  color: theme.colorTheme.dirtywhite,
+                  color: epicHireTheme.dirtyWhite,
                 ),
               ),
             ],
@@ -74,10 +74,10 @@ class _JobCardState extends ConsumerState<JobCard>
           const SizedBox(height: 8),
           Text(
             widget.job.title,
-            style: theme.textTheme.labelLarge.copyWith(
+            style: theme.textTheme.labelLarge!.copyWith(
               fontSize: 18,
               fontWeight: FontWeight.w700,
-              color: theme.colorTheme.dirtywhite,
+              color: epicHireTheme.dirtyWhite,
             ),
           ),
           const SizedBox(height: 12),
@@ -90,10 +90,10 @@ class _JobCardState extends ConsumerState<JobCard>
               Spacer(),
               Text(
                 GetTimeAgo.parse(widget.job.created),
-                style: theme.textTheme.caption.copyWith(
+                style: theme.textTheme.titleSmall!.copyWith(
                   fontSize: 12,
                   fontStyle: FontStyle.italic,
-                  color: theme.colorTheme.dirtywhite.withOpacity(0.8),
+                  color: epicHireTheme.dirtyWhite.withOpacity(0.8),
                 ),
               ),
             ],

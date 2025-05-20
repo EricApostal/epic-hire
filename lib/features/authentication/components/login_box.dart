@@ -22,16 +22,16 @@ class LoginBox extends ConsumerStatefulWidget {
 class _LoginBoxState extends ConsumerState<LoginBox> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).custom;
+    final theme = Theme.of(context);
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).custom.colorTheme.foreground,
+        color: EpicHireTheme.of(context).foreground,
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(0),
         child: TextFormField(
-          style: theme.textTheme.bodyText1,
+          style: theme.textTheme.bodyMedium,
           controller: widget.controller,
           autofillHints: widget.autofillHints,
           obscureText: widget.obscureText,

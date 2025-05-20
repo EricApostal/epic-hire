@@ -22,23 +22,24 @@ class _JobsListState extends ConsumerState<JobsList> {
 
     final jobs = jobListener.valueOrNull;
     if (jobs == null) {
-      return Scaffold(body: Center(child: CircularProgressIndicator()));
+      return Center(child: CircularProgressIndicator());
     }
 
-    return Scaffold(
-      body: ListView.builder(
-        padding: const EdgeInsets.only(top: 0),
-        itemCount: jobs.length,
-        itemBuilder: (context, index) {
-          final job = jobs[index];
-          return Column(
-            // TODO: isFirstCard is old code from a old design I had.
-            // This logic should be moved back to the listview, unless
-            // we create a new design that requires it.
-            children: [JobCard(job, isFirstCard: index == 0), Divider()],
-          );
-        },
-      ),
+    return ListView.builder(
+      padding: const EdgeInsets.only(top: 0),
+      itemCount: jobs.length,
+      itemBuilder: (context, index) {
+        final job = jobs[index];
+        return Column(
+          // TODO: isFirstCard is old code from a old design I had.
+          // This logic should be moved back to the listview, unless
+          // we create a new design that requires it.
+          children: [
+            JobCard(job, isFirstCard: index == 0),
+            Divider(),
+          ],
+        );
+      },
     );
   }
 }

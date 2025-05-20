@@ -2,37 +2,49 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AppColorsDark {
-  static const Color background = Color(0xFF14161A);
-  static const Color foreground = Color(0xFF21252B);
-  static const Color primary = Color(0xFF2448BE);
-  static const Color secondary = Color(0xFF585F6A);
-  static const Color tertiary = Color(0xFF333A44);
-  static const Color dirtyWhite = Color(0xFFD9D9D9);
+  static const background = Color(0xFF14161A);
+  static const foreground = Color(0xFF21252B);
+  static const dirtyWhite = Color(0xFFE4E5E8);
+  static const gray = Color(0xFF818491);
+  static const darkGray = Color(0xFF18191f);
+  static const primary = Color(0xff2448BE);
+  static const red = Color(0xFFED4245);
+  static const green = Color(0xFF57F287);
+  static const yellow = Color(0xFFFEE75C);
+}
+
+class AppColorsAmoled {
+  static const background = Color(0xFF000000);
+  static const foreground = Color(0xFF14161A);
+  static const dirtyWhite = Color(0xFFE4E5E8);
+  static const gray = Color(0xFF818491);
+  static const darkGray = Color(0xFF18191f);
+  static const primary = Color(0xff2448BE);
+  static const red = Color(0xFFED4245);
+  static const green = Color(0xFF57F287);
+  static const yellow = Color(0xFFFEE75C);
 }
 
 class ColorTheme {
   final Color background;
   final Color foreground;
+  final Color dirtyWhite;
+  final Color gray;
+  final Color darkGray;
   final Color primary;
-  final Color secondary;
-  final Color tertiary;
-  final Color dirtywhite;
-
   final Color red;
   final Color green;
-  final Color blue;
   final Color yellow;
 
   ColorTheme({
     required this.background,
     required this.foreground,
+    required this.dirtyWhite,
+    required this.gray,
+    required this.darkGray,
     required this.primary,
-    required this.secondary,
-    required this.tertiary,
-    required this.dirtywhite,
     required this.red,
     required this.green,
-    required this.blue,
     required this.yellow,
   });
 }

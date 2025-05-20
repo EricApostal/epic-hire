@@ -35,24 +35,22 @@ class _CompanySummaryListScreenState
         );
 
     if (companies == null) {
-      return Scaffold(body: Center(child: CircularProgressIndicator()));
+      return Center(child: CircularProgressIndicator());
     }
 
     final padding = MediaQuery.of(context).padding;
 
-    return Scaffold(
-      body: ListView.builder(
-        padding: EdgeInsets.only(top: padding.top + 12),
-        itemBuilder: (context, index) {
-          final company = companies[index];
-          final story = company.stories.firstOrNull;
-          if (story == null) return SizedBox();
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: CompanyStoryCard(company),
-          );
-        },
-      ),
+    return ListView.builder(
+      padding: EdgeInsets.only(top: padding.top + 12),
+      itemBuilder: (context, index) {
+        final company = companies[index];
+        final story = company.stories.firstOrNull;
+        if (story == null) return SizedBox();
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: CompanyStoryCard(company),
+        );
+      },
     );
   }
 }

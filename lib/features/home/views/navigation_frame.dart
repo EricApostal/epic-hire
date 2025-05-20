@@ -13,14 +13,12 @@ class NavigationFrame extends ConsumerStatefulWidget {
 class _OverviewState extends ConsumerState<NavigationFrame> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            Expanded(child: widget.child),
-            const NavigationBarWidget(),
-          ],
-        ),
+    return Center(
+      child: Column(
+        children: [
+          Expanded(child: widget.child),
+          const NavigationBarWidget(),
+        ],
       ),
     );
   }

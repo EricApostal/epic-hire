@@ -27,8 +27,7 @@ class _ClubCardState extends ConsumerState<ClubCard> {
                 OutlinedButton(
                   style: OutlinedButton.styleFrom(
                     minimumSize: Size.zero,
-                    foregroundColor:
-                        Theme.of(context).custom.colorTheme.dirtywhite,
+                    foregroundColor: EpicHireTheme.of(context).dirtyWhite,
                     padding: const EdgeInsets.only(
                       top: 12,
                       bottom: 12,
@@ -44,7 +43,7 @@ class _ClubCardState extends ConsumerState<ClubCard> {
 
                   child: Text(
                     widget.club.name,
-                    style: Theme.of(context).custom.textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
               ],
@@ -67,7 +66,7 @@ class _ClubCardState extends ConsumerState<ClubCard> {
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
                 minimumSize: Size.zero,
-                foregroundColor: Theme.of(context).custom.colorTheme.dirtywhite,
+                foregroundColor: EpicHireTheme.of(context).dirtyWhite,
                 padding: const EdgeInsets.only(
                   top: 12,
                   bottom: 12,
@@ -97,7 +96,7 @@ class _ClubCardState extends ConsumerState<ClubCard> {
               ),
             ),
           ),
-          Divider(color: Theme.of(context).custom.colorTheme.dirtywhite),
+          Divider(color: EpicHireTheme.of(context).dirtyWhite),
         ],
       ),
     );

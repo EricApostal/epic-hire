@@ -11,6 +11,6 @@ class StoryView extends ConsumerStatefulWidget {
 class _StoryViewState extends ConsumerState<StoryView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: const Placeholder());
+    return Placeholder();
   }
 }

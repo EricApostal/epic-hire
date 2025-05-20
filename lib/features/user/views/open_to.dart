@@ -24,7 +24,7 @@ class _OpenToScreenState extends ConsumerState<OpenToScreen> {
         child: Text(
           'No open opportunities',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(context).custom.colorTheme.dirtywhite,
+            color: EpicHireTheme.of(context).dirtyWhite,
           ),
         ),
       );
@@ -45,12 +45,12 @@ class OpenToCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context).custom;
+    final theme = EpicHireTheme.of(context);
 
     return Card(
       elevation: 2,
       margin: EdgeInsets.zero,
-      color: theme.colorTheme.foreground,
+      color: theme.foreground,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -63,24 +63,24 @@ class OpenToCard extends ConsumerWidget {
                   openTo.type.toCapitalized,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: theme.colorTheme.dirtywhite,
+                    color: theme.dirtyWhite,
                   ),
                 ),
                 if (openTo.startDate != null)
                   Text(
                     'Starts ${_formatDate(openTo.startDate!)}',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: theme.colorTheme.dirtywhite,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: theme.dirtyWhite),
                   ),
                 if (openTo.internshipTimeFrame.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(top: 8),
                     child: Text(
-                      '${openTo.internshipTimeFrame}',
+                      openTo.internshipTimeFrame,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: theme.colorTheme.dirtywhite,
+                        color: theme.dirtyWhite,
                       ),
                     ),
                   ),
@@ -100,8 +100,9 @@ class OpenToCard extends ConsumerWidget {
               _buildSection(
                 context,
                 title: 'Locations',
-                items:
-                    openTo.locations.map((l) => l.locality.toString()).toList(),
+                items: openTo.locations
+                    .map((l) => l.locality.toString())
+                    .toList(),
               ),
 
             if (openTo.jobTypes.isNotEmpty)
@@ -137,27 +138,25 @@ class OpenToCard extends ConsumerWidget {
             title,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
               fontWeight: FontWeight.bold,
-              color: Theme.of(context).custom.colorTheme.dirtywhite,
+              color: EpicHireTheme.of(context).dirtyWhite,
             ),
           ),
           const SizedBox(height: 4),
           Wrap(
             spacing: 4,
             runSpacing: 4,
-            children:
-                items
-                    .map(
-                      (item) => Chip(
-                        label: Text(item),
-                        visualDensity: VisualDensity.compact,
-                        color: WidgetStateProperty<Color>.fromMap({
-                          WidgetState.any:
-                              Theme.of(context).custom.colorTheme.foreground,
-                        }),
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                    )
-                    .toList(),
+            children: items
+                .map(
+                  (item) => Chip(
+                    label: Text(item),
+                    visualDensity: VisualDensity.compact,
+                    color: WidgetStateProperty<Color>.fromMap({
+                      WidgetState.any: EpicHireTheme.of(context).foreground,
+                    }),
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                )
+                .toList(),
           ),
         ],
       ),

@@ -48,34 +48,29 @@ class _ClubsScreenState extends ConsumerState<ClubsScreen> {
         );
 
     if (clubs == null) {
-      return Scaffold(body: Center(child: CircularProgressIndicator()));
+      return Center(child: CircularProgressIndicator());
     }
 
-    return Scaffold(
-      body: Column(
-        children: [
-          TitleBar(
-            Text(
-              "Explore Clubs",
-              style: Theme.of(context).custom.textTheme.titleMedium,
-            ),
+    return Column(
+      children: [
+        TitleBar(
+          Text("Explore Clubs", style: Theme.of(context).textTheme.titleMedium),
+        ),
+        Expanded(
+          child: ListView.builder(
+            controller: _scrollController,
+            itemCount: clubs.length,
+            padding: EdgeInsets.only(top: 0),
+            itemBuilder: (context, index) {
+              final club = clubs[index];
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 0),
+                child: ClubCard(club),
+              );
+            },
           ),
-          Expanded(
-            child: ListView.builder(
-              controller: _scrollController,
-              itemCount: clubs.length,
-              padding: EdgeInsets.only(top: 0),
-              itemBuilder: (context, index) {
-                final club = clubs[index];
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 0),
-                  child: ClubCard(club),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

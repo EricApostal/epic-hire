@@ -1,5 +1,6 @@
 import 'package:epic_hire/features/router/controller.dart';
 import 'package:epic_hire/theme/theme.dart';
+import 'package:epic_hire/theme/themes/dark.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,8 +32,7 @@ class _MainAppState extends ConsumerState<MainApp> {
 
     return MaterialApp.router(
       title: 'EpicHire',
-      theme: ref.read(darkThemeProvider),
-      darkTheme: ref.read(darkThemeProvider),
+      theme: darkTheme,
       routerConfig: routerController,
     );
   }
