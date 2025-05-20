@@ -91,12 +91,12 @@ class ConversationManager extends ReadOnlyManager<Conversation> {
     );
   }
 
-  Future<List<Conversation>> fetchConversationPages() async {
+  Future<List<Conversation>> fetchConversationPages(int page, int limit) async {
     final route = HttpRoute()..conversations();
     final request = BasicRequest(
       route,
       1,
-      queryParameters: {"page": "0", "limit": "10"},
+      queryParameters: {"page": page.toString(), "limit": limit.toString()},
     );
 
     final response = await client.httpHandler.executeSafe(request);
