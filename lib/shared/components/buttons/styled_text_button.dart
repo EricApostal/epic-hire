@@ -45,7 +45,9 @@ class _StyledTextButtonState extends State<StyledTextButton> {
           child: Center(
             child: Text(
               widget.text,
-              style: Theme.of(context).textTheme.labelLarge,
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
         ),

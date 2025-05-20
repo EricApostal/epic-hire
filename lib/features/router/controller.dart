@@ -3,6 +3,7 @@ import 'package:epic_hire/features/company/views/summary_view.dart';
 import 'package:epic_hire/features/home/views/home.dart';
 import 'package:epic_hire/features/home/views/navigation_frame.dart';
 import 'package:epic_hire/features/jobs/views/jobs.dart';
+import 'package:epic_hire/features/messaging/views/direct_messages.dart';
 import 'package:epic_hire/features/story/components/story_slider.dart';
 import 'package:epic_hire/features/user/views/profile.dart';
 import 'package:epic_hire/theme/theme.dart';
@@ -13,8 +14,6 @@ final routerController = GoRouter(
   initialLocation: '/login',
   routes: [
     ShellRoute(
-      // TODO: If we're using bottom_animated_navigation_bar, the
-      // scaffold should be in it's own component
       builder: (context, state, child) => Scaffold(
         body: child,
         backgroundColor: EpicHireTheme.of(context).background,
@@ -38,11 +37,13 @@ final routerController = GoRouter(
           builder: (context, state, child) => NavigationFrame(child: child),
           routes: [
             GoRoute(
-              path: "/home",
-              pageBuilder: (context, state) => NoTransitionPage<void>(
-                key: state.pageKey,
-                child: HomeScreen(),
-              ),
+              path: "/direct-messages",
+
+              // pageBuilder: (context, state) => NoTransitionPage<void>(
+              //   key: state.pageKey,
+              //   child: HomeScreen(),
+              // ),
+              builder: (context, state) => DirectMessagesScreen(),
             ),
             GoRoute(
               path: "/companies",

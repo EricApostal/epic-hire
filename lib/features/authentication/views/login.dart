@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -19,77 +20,98 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Form(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(
-            16,
-            MediaQuery.of(context).padding.top + 16,
-            16,
-            MediaQuery.of(context).padding.bottom + 16,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset("assets/icons/epic-hire-banner.svg", height: 90),
-              const SizedBox(height: 20),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Login to Epic Hire",
-                        style: Theme.of(context).textTheme.displaySmall,
-                      ),
-                      Text(
-                        "We're happy to have you back!",
-                        style: Theme.of(context).textTheme.labelLarge,
-                      ),
-                      const SizedBox(height: 20),
-                    ],
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+          colors: [Color(0xFF128FFF), Color.fromARGB(255, 127, 110, 255)],
+        ),
+      ),
+      child: Center(
+        child: Form(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(
+              16,
+              MediaQuery.of(context).padding.top + 16,
+              16,
+              MediaQuery.of(context).padding.bottom + 16,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // SvgPicture.asset(
+                //   "assets/icons/epic-hire-banner.svg",
+                //   height: 90,
+                // ),
+                const SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Login",
+                          style: Theme.of(context).textTheme.displayLarge!
+                              .copyWith(
+                                fontFamily: GoogleFonts.outfit().fontFamily,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.white,
+                              ),
+                        ),
+                        const SizedBox(height: 30),
+                        // Text(
+                        //   "We're happy to have you back!",
+                        //   style: Theme.of(context).textTheme.labelLarge,
+                        // ),
+                        // const SizedBox(height: 20),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              LoginBox(
-                hintText: "Email",
-                controller: usernameController,
-                autofillHints: ["email", "username"],
-                obscureText: false,
-              ),
-              const SizedBox(height: 12),
-              LoginBox(
-                hintText: "Password",
-                controller: passwordController,
-                autofillHints: ["password"],
-                obscureText: true,
-              ),
-              Spacer(),
-              StyledTextButton(
-                "Submit",
-                callback: () async {
-                  final _ = await ref
-                      .read(authenticationProvider.notifier)
-                      .login(usernameController.text, passwordController.text);
-                  GoRouter.of(context).go("/home");
-                },
-                backgroundColor: EpicHireTheme.of(context).primary,
-              ),
-              const SizedBox(height: 12),
-              StyledTextButton(
-                "Continue as Guest",
-                callback: () async {
-                  await ref
-                      .read(authenticationProvider.notifier)
-                      .loginAsGuest();
-                  GoRouter.of(context).go("/home");
-                },
-                backgroundColor: EpicHireTheme.of(context).foreground,
-              ),
-            ],
+                LoginBox(
+                  hintText: "Email",
+                  controller: usernameController,
+                  autofillHints: ["email", "username"],
+                  obscureText: false,
+                ),
+                const SizedBox(height: 12),
+                LoginBox(
+                  hintText: "Password",
+                  controller: passwordController,
+                  autofillHints: ["password"],
+                  obscureText: true,
+                ),
+                Spacer(),
+                StyledTextButton(
+                  "Submit",
+                  callback: () async {
+                    final _ = await ref
+                        .read(authenticationProvider.notifier)
+                        .login(
+                          usernameController.text,
+                          passwordController.text,
+                        );
+                    GoRouter.of(context).go("/direct-messages");
+                  },
+                  backgroundColor: EpicHireTheme.of(context).dirtyWhite,
+                ),
+                const SizedBox(height: 12),
+                StyledTextButton(
+                  "Continue as Guest",
+                  callback: () async {
+                    await ref
+                        .read(authenticationProvider.notifier)
+                        .loginAsGuest();
+                    GoRouter.of(context).go("/direct-messages");
+                  },
+                  backgroundColor: EpicHireTheme.of(context).dirtyWhite,
+                ),
+              ],
+            ),
           ),
         ),
       ),

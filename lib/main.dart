@@ -7,6 +7,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.edgeToEdge,
+    overlays: [SystemUiOverlay.top],
+  );
   runApp(ProviderScope(child: const MainApp()));
 }
 
@@ -32,7 +37,7 @@ class _MainAppState extends ConsumerState<MainApp> {
 
     return MaterialApp.router(
       title: 'EpicHire',
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
       theme: getLightTheme(context),
       darkTheme: getDarkTheme(context),
       routerConfig: routerController,

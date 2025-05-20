@@ -22,27 +22,32 @@ class LoginBox extends ConsumerStatefulWidget {
 class _LoginBoxState extends ConsumerState<LoginBox> {
   @override
   Widget build(BuildContext context) {
-    // final theme = Theme.of(context);
+    final theme = Theme.of(context);
     return Container(
       decoration: BoxDecoration(
-        color: EpicHireTheme.of(context).foreground,
+        color: EpicHireTheme.of(context).dirtyWhite.withValues(alpha: 1),
         borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(0),
         child: TextFormField(
-          // style: theme.textTheme.bodyMedium,
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
           controller: widget.controller,
           autofillHints: widget.autofillHints,
           obscureText: widget.obscureText,
 
           decoration: InputDecoration(
+            hintStyle: Theme.of(
+              context,
+            ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w500),
             border: InputBorder.none,
             enabledBorder: InputBorder.none,
             focusedBorder: InputBorder.none,
             errorBorder: InputBorder.none,
             disabledBorder: InputBorder.none,
-            contentPadding: EdgeInsets.all(18),
+            contentPadding: EdgeInsets.all(22),
             hintText: widget.hintText,
           ),
           validator: (value) {
