@@ -96,7 +96,7 @@ class ConversationManager extends ReadOnlyManager<Conversation> {
     final request = BasicRequest(
       route,
       1,
-      queryParameters: {"page": "0", "limit": "4"},
+      queryParameters: {"page": "0", "limit": "10"},
     );
 
     final response = await client.httpHandler.executeSafe(request);

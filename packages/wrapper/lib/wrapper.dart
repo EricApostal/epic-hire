@@ -23,6 +23,7 @@ export 'src/http/managers/user_manager.dart' show UserManager;
 export 'src/http/managers/company_manager.dart' show CompanyManager;
 export 'src/http/managers/club_manager.dart' show ClubManager;
 export 'src/http/managers/school_manager.dart' show SchoolManager;
+export 'src/http/managers/conversation_manager.dart' show ConversationManager;
 
 export 'src/models/identified.dart' show Identified;
 export 'src/models/user/user.dart' show PartialUser, User;
@@ -38,6 +39,12 @@ export 'src/models/job/highlight.dart' show JobHighlight;
 export 'src/models/job/location.dart' show Location;
 export 'src/models/job/media.dart' show JobMedia;
 export 'src/models/job/reaction.dart' show Reaction;
+export 'src/models/conversation/conversation.dart'
+    show PartialConversation, Conversation;
+export 'src/models/conversation/member.dart'
+    show ConversationMember, ConversationMemberRole, ConversationMemberType;
+export 'src/models/conversation/message.dart' show Message, MessageType;
+export 'src/models/conversation/tapback.dart' show Tapback;
 
 export 'src/plugin/plugin.dart' show WrapperPlugin, WrapperPluginState;
 export 'src/plugin/logging.dart' show Logging, logging;

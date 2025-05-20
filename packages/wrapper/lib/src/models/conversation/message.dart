@@ -1,7 +1,3 @@
-// TODO: MessageDTO
-// also make sure you check v3 conversation. Are we using that?
-
-import 'package:uuid/uuid.dart';
 import 'package:wrapper/src/models/conversation/member.dart';
 import 'package:wrapper/src/models/conversation/tapback.dart';
 
