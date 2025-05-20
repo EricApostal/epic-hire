@@ -1,7 +1,6 @@
 import 'package:epic_hire/features/clubs/components/club_card.dart';
 import 'package:epic_hire/features/clubs/repositories/clubs.dart';
 import 'package:epic_hire/shared/components/title_bar.dart';
-import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

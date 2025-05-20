@@ -5,6 +5,7 @@ class AppColorsDark {
   static const background = Color(0xFF14161A);
   static const foreground = Color(0xFF21252B);
   static const dirtyWhite = Color(0xFFE4E5E8);
+  static const white = Color.fromARGB(255, 255, 255, 255);
   static const gray = Color(0xFF818491);
   static const darkGray = Color(0xFF18191f);
   static const primary = Color(0xff2448BE);
@@ -17,6 +18,20 @@ class AppColorsAmoled {
   static const background = Color(0xFF000000);
   static const foreground = Color(0xFF14161A);
   static const dirtyWhite = Color(0xFFE4E5E8);
+  static const white = Color.fromARGB(255, 255, 255, 255);
+  static const gray = Color(0xFF818491);
+  static const darkGray = Color(0xFF18191f);
+  static const primary = Color(0xff2448BE);
+  static const red = Color(0xFFED4245);
+  static const green = Color(0xFF57F287);
+  static const yellow = Color(0xFFFEE75C);
+}
+
+class AppColorsLight {
+  static const background = Color.fromARGB(255, 255, 255, 255);
+  static const foreground = Color.fromARGB(255, 208, 214, 225);
+  static const dirtyWhite = Color(0xFFE4E5E8);
+  static const white = Color.fromARGB(255, 255, 255, 255);
   static const gray = Color(0xFF818491);
   static const darkGray = Color(0xFF18191f);
   static const primary = Color(0xff2448BE);

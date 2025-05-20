@@ -13,6 +13,8 @@ final routerController = GoRouter(
   initialLocation: '/login',
   routes: [
     ShellRoute(
+      // TODO: If we're using bottom_animated_navigation_bar, the
+      // scaffold should be in it's own component
       builder: (context, state, child) => Scaffold(
         body: child,
         backgroundColor: EpicHireTheme.of(context).background,

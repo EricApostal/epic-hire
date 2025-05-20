@@ -43,11 +43,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     children: [
                       Text(
                         "Login to Epic Hire",
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: Theme.of(context).textTheme.displaySmall,
                       ),
                       Text(
                         "We're happy to have you back!",
-                        style: Theme.of(context).textTheme.labelMedium,
+                        style: Theme.of(context).textTheme.labelLarge,
                       ),
                       const SizedBox(height: 20),
                     ],

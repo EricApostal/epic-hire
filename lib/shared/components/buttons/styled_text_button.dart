@@ -1,4 +1,4 @@
-import 'package:epic_hire/theme/theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,6 +23,7 @@ class StyledTextButton extends StatefulWidget {
 class _StyledTextButtonState extends State<StyledTextButton> {
   @override
   Widget build(BuildContext context) {
+    // return CupertinoButton.filled(child: Text(widget.text), onPressed: () {});
     return InkWell(
       splashFactory: NoSplash.splashFactory,
       splashColor: Colors.transparent,
@@ -44,7 +45,7 @@ class _StyledTextButtonState extends State<StyledTextButton> {
           child: Center(
             child: Text(
               widget.text,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.labelLarge,
             ),
           ),
         ),
