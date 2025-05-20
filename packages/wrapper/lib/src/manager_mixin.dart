@@ -1,6 +1,7 @@
 import 'package:wrapper/src/client.dart';
 import 'package:wrapper/src/client_options.dart';
 import 'package:wrapper/src/http/managers/club_manager.dart';
+import 'package:wrapper/src/http/managers/conversation_manager.dart';
 import 'package:wrapper/src/http/managers/job_manager.dart';
 import 'package:wrapper/src/http/managers/school_manager.dart';
 import 'package:wrapper/src/http/managers/company_manager.dart';
@@ -30,4 +31,7 @@ mixin ManagerMixin implements Wrapper {
 
   StoryManager get stories =>
       StoryManager(options.storyCacheConfig, this as WrapperRest);
+
+  ConversationManager get conversations =>
+      ConversationManager(options.conversationCacheConfig, this as WrapperRest);
 }

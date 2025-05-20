@@ -4,7 +4,7 @@ import 'package:epic_hire/theme/themes/base.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_platform/universal_platform.dart';
 
-bool useAmoled = true;
+bool useAmoled = false;
 
 ThemeData getDarkTheme(BuildContext context) {
   return ThemeData.from(
@@ -24,6 +24,8 @@ ThemeData getDarkTheme(BuildContext context) {
               red: AppColorsAmoled.red,
               green: AppColorsAmoled.green,
               yellow: AppColorsAmoled.yellow,
+              purple: AppColorsAmoled.purple,
+              blue: AppColorsAmoled.blue,
             )
           : const EpicHireTheme(
               foreground: AppColorsDark.foreground,
@@ -36,6 +38,8 @@ ThemeData getDarkTheme(BuildContext context) {
               red: AppColorsDark.red,
               green: AppColorsDark.green,
               yellow: AppColorsDark.yellow,
+              purple: AppColorsDark.purple,
+              blue: AppColorsDark.blue,
             ),
     ],
   );

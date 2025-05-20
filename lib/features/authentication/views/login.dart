@@ -95,7 +95,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           usernameController.text,
                           passwordController.text,
                         );
-                    GoRouter.of(context).go("/direct-messages");
+                    GoRouter.of(context).go("/messages");
                   },
                   backgroundColor: EpicHireTheme.of(context).dirtyWhite,
                 ),
@@ -106,7 +106,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     await ref
                         .read(authenticationProvider.notifier)
                         .loginAsGuest();
-                    GoRouter.of(context).go("/direct-messages");
+                    GoRouter.of(context).go("/messages");
                   },
                   backgroundColor: EpicHireTheme.of(context).dirtyWhite,
                 ),

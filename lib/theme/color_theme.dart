@@ -1,6 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
+class StandardColors {
+  static const red = Color(0xFFFF5D76);
+  static const purple = Color(0xFF826EFF);
+  static const green = Color(0xFF00CC91);
+  static const blue = Color(0xFF0095FF);
+}
+
 class AppColorsDark {
   static const background = Color(0xFF14161A);
   static const foreground = Color(0xFF21252B);
@@ -9,8 +16,10 @@ class AppColorsDark {
   static const gray = Color(0xFF818491);
   static const darkGray = Color(0xFF18191f);
   static const primary = Color(0xff2448BE);
-  static const red = Color(0xFFED4245);
-  static const green = Color(0xFF57F287);
+  static const blue = StandardColors.blue;
+  static const red = StandardColors.red;
+  static const green = StandardColors.green;
+  static const purple = StandardColors.purple;
   static const yellow = Color(0xFFFEE75C);
 }
 
@@ -22,8 +31,10 @@ class AppColorsAmoled {
   static const gray = Color(0xFF818491);
   static const darkGray = Color(0xFF18191f);
   static const primary = Color(0xff2448BE);
-  static const red = Color(0xFFED4245);
-  static const green = Color(0xFF57F287);
+  static const blue = StandardColors.blue;
+  static const red = StandardColors.red;
+  static const green = StandardColors.green;
+  static const purple = StandardColors.purple;
   static const yellow = Color(0xFFFEE75C);
 }
 
@@ -35,8 +46,10 @@ class AppColorsLight {
   static const gray = Color(0xFF818491);
   static const darkGray = Color(0xFF18191f);
   static const primary = Color(0xff2448BE);
-  static const red = Color(0xFFED4245);
-  static const green = Color(0xFF57F287);
+  static const blue = StandardColors.blue;
+  static const red = StandardColors.red;
+  static const green = StandardColors.green;
+  static const purple = StandardColors.purple;
   static const yellow = Color(0xFFFEE75C);
 }
 

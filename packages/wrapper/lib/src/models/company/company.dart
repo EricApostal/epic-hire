@@ -1,8 +1,10 @@
+import 'package:wrapper/src/http/managers/company_manager.dart';
 import 'package:wrapper/src/models/identified_entity/identified_entity.dart';
 import 'package:wrapper/src/models/job/category.dart';
 import 'package:wrapper/src/models/job/highlight.dart';
 import 'package:wrapper/src/models/job/location.dart';
-import 'package:wrapper/wrapper.dart';
+import 'package:wrapper/src/models/school/school.dart';
+import 'package:wrapper/src/models/story/story.dart';
 
 class PartialCompany extends ManagedIdentifiedEntity<Company> {
   @override

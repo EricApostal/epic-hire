@@ -89,4 +89,8 @@ extension RouteHelpers on HttpRoute {
   void search() => add(HttpRoutePart("search"));
   void jobBoard() => add(HttpRoutePart("job-board"));
   void homeFeed() => add(HttpRoutePart("home-feed"));
+  void conversations() => add(HttpRoutePart("conversations"));
+  void conversationsWith(int userId) => add(
+    HttpRoutePart("conversations-with", [HttpRouteParam(userId.toString())]),
+  );
 }

@@ -18,6 +18,8 @@ ThemeData getLightTheme(BuildContext context) {
         red: AppColorsLight.red,
         green: AppColorsLight.green,
         yellow: AppColorsLight.yellow,
+        purple: AppColorsLight.purple,
+        blue: AppColorsLight.blue,
       ),
     ],
   );

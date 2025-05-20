@@ -14,6 +14,8 @@ class EpicHireTheme extends ThemeExtension<EpicHireTheme> {
     required this.darkGray,
     required this.primary,
     required this.red,
+    required this.purple,
+    required this.blue,
     required this.green,
     required this.yellow,
   });
@@ -27,6 +29,8 @@ class EpicHireTheme extends ThemeExtension<EpicHireTheme> {
   final Color primary;
   final Color red;
   final Color green;
+  final Color purple;
+  final Color blue;
   final Color yellow;
 
   @override
@@ -41,6 +45,8 @@ class EpicHireTheme extends ThemeExtension<EpicHireTheme> {
     Color? red,
     Color? green,
     Color? yellow,
+    Color? purple,
+    Color? blue,
   }) {
     return EpicHireTheme(
       foreground: foreground ?? this.foreground,
@@ -53,6 +59,8 @@ class EpicHireTheme extends ThemeExtension<EpicHireTheme> {
       red: red ?? this.red,
       green: green ?? this.green,
       yellow: yellow ?? this.yellow,
+      blue: blue ?? this.blue,
+      purple: purple ?? this.purple,
     );
   }
 
@@ -76,6 +84,8 @@ class EpicHireTheme extends ThemeExtension<EpicHireTheme> {
       red: Color.lerp(red, other.red, t)!,
       green: Color.lerp(green, other.green, t)!,
       yellow: Color.lerp(yellow, other.yellow, t)!,
+      purple: Color.lerp(purple, other.purple, t)!,
+      blue: Color.lerp(blue, other.blue, t)!,
     );
   }
 }

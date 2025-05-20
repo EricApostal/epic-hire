@@ -1,3 +1,9 @@
+/**
+ * TODO: Be consistent here. I use identified because this library is based off of nyxx, which uses
+ * snowflakes. This can practically just be an int because there's not parsing to do. It's probably
+ * best to just remove this until a different ID system is implemented.
+ */
+
 /// A unique ID used to identify objects in the API.
 class Identified implements Comparable<Identified> {
   /// A snowflake with a value of 0.

@@ -7,7 +7,6 @@ environment:
   sdk: ^3.8.0-70.0.dev
 
 dependencies:
-  animated_bottom_navigation_bar: ^1.4.0
   bitsdojo_window: ^0.1.6
   cached_network_image: ^3.4.1
   flutter:

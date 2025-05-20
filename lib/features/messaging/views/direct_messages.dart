@@ -12,17 +12,7 @@ class DirectMessagesScreen extends ConsumerStatefulWidget {
 
 class _DirectMessagesScreenState extends ConsumerState<DirectMessagesScreen> {
   @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((dt) {
-      NavigationFrame.of(
-        context,
-      )!.setFloatingActionButton(FloatingActionButton(onPressed: () {}));
-    });
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return ListView.builder(itemBuilder: (context, index) {});
   }
 }

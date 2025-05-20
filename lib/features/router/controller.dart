@@ -1,9 +1,11 @@
 import 'package:epic_hire/features/authentication/views/login.dart';
 import 'package:epic_hire/features/company/views/summary_view.dart';
+import 'package:epic_hire/features/events/views/events.dart';
 import 'package:epic_hire/features/home/views/home.dart';
 import 'package:epic_hire/features/home/views/navigation_frame.dart';
 import 'package:epic_hire/features/jobs/views/jobs.dart';
 import 'package:epic_hire/features/messaging/views/direct_messages.dart';
+import 'package:epic_hire/features/search/screens/search_screen.dart';
 import 'package:epic_hire/features/story/components/story_slider.dart';
 import 'package:epic_hire/features/user/views/profile.dart';
 import 'package:epic_hire/theme/theme.dart';
@@ -37,14 +39,18 @@ final routerController = GoRouter(
           builder: (context, state, child) => NavigationFrame(child: child),
           routes: [
             GoRoute(
-              path: "/direct-messages",
-
-              // pageBuilder: (context, state) => NoTransitionPage<void>(
-              //   key: state.pageKey,
-              //   child: HomeScreen(),
-              // ),
+              path: "/messages",
               builder: (context, state) => DirectMessagesScreen(),
             ),
+            GoRoute(
+              path: "/events",
+              builder: (context, state) => EventScreen(),
+            ),
+            GoRoute(
+              path: "/search",
+              builder: (context, state) => SearchScreen(),
+            ),
+            GoRoute(path: "/work", builder: (context, state) => SearchScreen()),
             GoRoute(
               path: "/companies",
               pageBuilder: (context, state) => NoTransitionPage<void>(
