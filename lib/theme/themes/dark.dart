@@ -8,9 +8,10 @@ bool useAmoled = false;
 
 ThemeData getDarkTheme(BuildContext context) {
   return ThemeData.from(
-    colorScheme: ColorScheme.dark(primary: AppColorsAmoled.primary),
+    colorScheme: ColorScheme.dark(primary: AppColorsAmoled.blue),
   ).copyWith(
     textTheme: getBaseTextTheme(context),
+
     extensions: [
       (UniversalPlatform.isMobile && useAmoled)
           ? const EpicHireTheme(
@@ -20,6 +21,7 @@ ThemeData getDarkTheme(BuildContext context) {
               white: AppColorsAmoled.white,
               gray: AppColorsAmoled.gray,
               darkGray: AppColorsAmoled.darkGray,
+              lightGray: AppColorsAmoled.lightGray,
               primary: AppColorsAmoled.primary,
               red: AppColorsAmoled.red,
               green: AppColorsAmoled.green,
@@ -34,6 +36,7 @@ ThemeData getDarkTheme(BuildContext context) {
               white: AppColorsDark.white,
               gray: AppColorsDark.gray,
               darkGray: AppColorsDark.darkGray,
+              lightGray: AppColorsDark.lightGray,
               primary: AppColorsDark.primary,
               red: AppColorsDark.red,
               green: AppColorsDark.green,

@@ -14,7 +14,10 @@ class DirectMessagesScreen extends ConsumerStatefulWidget {
 class _DirectMessagesScreenState extends ConsumerState<DirectMessagesScreen> {
   @override
   Widget build(BuildContext context) {
+    final padding = MediaQuery.paddingOf(context);
+
     return ListView.builder(
+      padding: EdgeInsets.only(left: 12, right: 12, top: padding.top + 4),
       itemBuilder: (context, index) {
         if (index == 0) {
           return SizedBox(height: 100, child: _HorizontalRecents());
@@ -44,15 +47,16 @@ class __HorizontalRecentsState extends ConsumerState<_HorizontalRecents> {
     }
 
     return ListView.builder(
-      padding: EdgeInsets.only(
-        top: padding.top + 8,
-        left: padding.left + 4,
-        right: padding.right + 4,
-      ),
+      // padding: EdgeInsets.only(
+      //   // top: padding.top + 8,
+      //   // left: padding.left + 4,
+      //   // right: padding.right + 4,
+      // ),
       scrollDirection: Axis.horizontal,
       itemCount: conversations.length,
       itemBuilder: (context, index) {
-        return SizedBox(
+        return Padding(
+          padding: EdgeInsets.only(right: 8),
           // width: 72,
           // height: 72,
           child: UserPresenceIcon(conversation: conversations[index]),

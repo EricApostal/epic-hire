@@ -14,6 +14,7 @@ ThemeData getLightTheme(BuildContext context) {
         white: AppColorsLight.white,
         gray: AppColorsLight.gray,
         darkGray: AppColorsLight.darkGray,
+        lightGray: AppColorsLight.lightGray,
         primary: AppColorsLight.primary,
         red: AppColorsLight.red,
         green: AppColorsLight.green,

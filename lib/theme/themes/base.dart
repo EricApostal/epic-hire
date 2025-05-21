@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-String family = GoogleFonts.publicSans().fontFamily!;
+String family = GoogleFonts.inter().fontFamily!;
 
 TextTheme getBaseTextTheme(BuildContext context) {
-  return Theme.of(context).textTheme.apply(fontFamily: family);
+  return Theme.of(context).textTheme
+      .apply(fontFamily: family)
+      .copyWith(
+        labelLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+        labelMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+      );
 }
 
 

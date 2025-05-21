@@ -7,3 +7,5 @@ I'm double caching. I have the cache handler with `.get`, as well as the riverpo
 There's a lot of managers that don't implement fetch and indexing (a requirement due to their inheritance). I should make sure that I am using those manager types correctly, and implement them properly.
 
 The `Identified` objects are super dumb. Every day I think that we just need to go back down to an `int` and completely rid of identified. This structure should return if we were to use snowflakes.
+
+The way theming works is kinda dumb. There is Theme.of(context), and EpicHireTheme.of(context), and both are needed (Theme for TextTheme, EpicHireTheme for colors). I should find a better way of doing that.

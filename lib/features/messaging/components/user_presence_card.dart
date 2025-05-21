@@ -17,7 +17,10 @@ class _UserPresenceIconState extends ConsumerState<UserPresenceIcon> {
   Widget build(BuildContext context) {
     return ClipOval(
       child: Image.network(
-        getUrlFromImageKey(widget.conversation.members.first.imageKey),
+        getUrlFromImageKey(
+          widget.conversation.members.first.imageKey,
+          width: 256,
+        ),
       ),
     );
   }

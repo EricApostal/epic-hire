@@ -1,10 +1,11 @@
+import 'package:chiclet/chiclet.dart';
 import 'package:epic_hire/features/authentication/components/login_box.dart';
 import 'package:epic_hire/features/authentication/repositories/login.dart';
 import 'package:epic_hire/shared/components/buttons/styled_text_button.dart';
 import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,97 +21,153 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          colors: [Color(0xFF128FFF), Color.fromARGB(255, 127, 110, 255)],
+    final theme = EpicHireTheme.of(context);
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: 0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: EpicHireTheme.of(context).background,
+          // gradient: LinearGradient(
+          //   begin: Alignment.bottomCenter,
+          //   end: Alignment.topCenter,
+          //   colors: [Color(0xFF128FFF), Color.fromARGB(255, 127, 110, 255)],
+          // ),
         ),
-      ),
-      child: Center(
-        child: Form(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(
-              16,
-              MediaQuery.of(context).padding.top + 16,
-              16,
-              MediaQuery.of(context).padding.bottom + 16,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // SvgPicture.asset(
-                //   "assets/icons/epic-hire-banner.svg",
-                //   height: 90,
-                // ),
-                const SizedBox(height: 20),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8),
+        child: Center(
+          child: Form(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                16,
+                MediaQuery.of(context).padding.top + 16,
+                16,
+                MediaQuery.of(context).padding.bottom + 16,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // SvgPicture.asset(
+                  //   "assets/icons/epic-hire-banner.svg",
+                  //   height: 90,
+                  // ),
+                  // const SizedBox(height: 20),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Login",
+                            style: Theme.of(context).textTheme.displayLarge!
+                                .copyWith(
+                                  fontFamily: GoogleFonts.outfit().fontFamily,
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.white,
+                                ),
+                          ),
+                          Text(
+                            "We're happy to have you back!",
+                            style: Theme.of(context).textTheme.bodyMedium!
+                                .copyWith(
+                                  fontFamily: GoogleFonts.outfit().fontFamily,
+                                  fontWeight: FontWeight.w900,
+                                  color: theme.lightGray,
+                                ),
+                          ),
+
+                          const SizedBox(height: 30),
+                          // Text(
+                          //   "We're happy to have you back!",
+                          //   style: Theme.of(context).textTheme.labelLarge,
+                          // ),
+                          // const SizedBox(height: 20),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: theme.gray, width: 2),
+                      borderRadius: BorderRadius.all(Radius.circular(18)),
+                    ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Login",
-                          style: Theme.of(context).textTheme.displayLarge!
-                              .copyWith(
-                                fontFamily: GoogleFonts.outfit().fontFamily,
-                                fontWeight: FontWeight.w900,
-                                color: Colors.white,
-                              ),
+                        LoginBox(
+                          hintText: "Email",
+                          controller: usernameController,
+                          autofillHints: ["email", "username"],
+                          obscureText: false,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(18),
+                            topRight: Radius.circular(18),
+                          ),
                         ),
-                        const SizedBox(height: 30),
-                        // Text(
-                        //   "We're happy to have you back!",
-                        //   style: Theme.of(context).textTheme.labelLarge,
-                        // ),
-                        // const SizedBox(height: 20),
+                        Container(
+                          width: double.infinity,
+                          height: 2,
+                          color: theme.gray,
+                        ),
+                        // const SizedBox(height: 12),
+                        LoginBox(
+                          hintText: "Password",
+                          controller: passwordController,
+                          autofillHints: ["password"],
+                          obscureText: true,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(18),
+                            bottomRight: Radius.circular(18),
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                ),
-                LoginBox(
-                  hintText: "Email",
-                  controller: usernameController,
-                  autofillHints: ["email", "username"],
-                  obscureText: false,
-                ),
-                const SizedBox(height: 12),
-                LoginBox(
-                  hintText: "Password",
-                  controller: passwordController,
-                  autofillHints: ["password"],
-                  obscureText: true,
-                ),
-                Spacer(),
-                StyledTextButton(
-                  "Submit",
-                  callback: () async {
-                    final _ = await ref
-                        .read(authenticationProvider.notifier)
-                        .login(
-                          usernameController.text,
-                          passwordController.text,
-                        );
-                    GoRouter.of(context).go("/messages");
-                  },
-                  backgroundColor: EpicHireTheme.of(context).dirtyWhite,
-                ),
-                const SizedBox(height: 12),
-                StyledTextButton(
-                  "Continue as Guest",
-                  callback: () async {
-                    await ref
-                        .read(authenticationProvider.notifier)
-                        .loginAsGuest();
-                    GoRouter.of(context).go("/messages");
-                  },
-                  backgroundColor: EpicHireTheme.of(context).dirtyWhite,
-                ),
-              ],
+                  Spacer(),
+                  ChicletOutlinedAnimatedButton(
+                    width: double.infinity,
+                    onPressed: () async {
+                      final _ = await ref
+                          .read(authenticationProvider.notifier)
+                          .login(
+                            usernameController.text,
+                            passwordController.text,
+                          );
+                      GoRouter.of(context).go("/messages");
+                    },
+                    backgroundColor: EpicHireTheme.of(context).blue,
+                    borderColor: EpicHireTheme.of(
+                      context,
+                    ).blue.withValues(alpha: 0.7),
+                    child: Text(
+                      "Submit",
+                      style: Theme.of(
+                        context,
+                      ).textTheme.labelLarge!.copyWith(color: Colors.white),
+                    ),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  ChicletOutlinedAnimatedButton(
+                    width: double.infinity,
+                    onPressed: () async {
+                      await ref
+                          .read(authenticationProvider.notifier)
+                          .loginAsGuest();
+                      GoRouter.of(context).go("/messages");
+                    },
+                    backgroundColor: theme.dirtyWhite,
+                    borderColor: theme.dirtyWhite.withValues(alpha: 0.7),
+                    child: Text(
+                      "Continue as Guest",
+                      style: Theme.of(
+                        context,
+                      ).textTheme.labelLarge!.copyWith(color: theme.background),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

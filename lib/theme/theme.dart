@@ -12,6 +12,7 @@ class EpicHireTheme extends ThemeExtension<EpicHireTheme> {
     required this.white,
     required this.gray,
     required this.darkGray,
+    required this.lightGray,
     required this.primary,
     required this.red,
     required this.purple,
@@ -26,6 +27,7 @@ class EpicHireTheme extends ThemeExtension<EpicHireTheme> {
   final Color white;
   final Color gray;
   final Color darkGray;
+  final Color lightGray;
   final Color primary;
   final Color red;
   final Color green;
@@ -41,6 +43,7 @@ class EpicHireTheme extends ThemeExtension<EpicHireTheme> {
     Color? white,
     Color? gray,
     Color? darkGray,
+    Color? lightGray,
     Color? primary,
     Color? red,
     Color? green,
@@ -55,6 +58,7 @@ class EpicHireTheme extends ThemeExtension<EpicHireTheme> {
       white: white ?? this.white,
       gray: gray ?? this.gray,
       darkGray: darkGray ?? this.darkGray,
+      lightGray: lightGray ?? this.lightGray,
       primary: primary ?? this.primary,
       red: red ?? this.red,
       green: green ?? this.green,
@@ -80,6 +84,7 @@ class EpicHireTheme extends ThemeExtension<EpicHireTheme> {
       white: Color.lerp(white, other.white, t)!,
       gray: Color.lerp(gray, other.gray, t)!,
       darkGray: Color.lerp(darkGray, other.darkGray, t)!,
+      lightGray: Color.lerp(lightGray, other.lightGray, t)!,
       primary: Color.lerp(primary, other.primary, t)!,
       red: Color.lerp(red, other.red, t)!,
       green: Color.lerp(green, other.green, t)!,
