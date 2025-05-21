@@ -22,11 +22,10 @@ class _StartupLoadingScreenState extends ConsumerState<StartupLoadingScreen> {
   }
 
   _tryLogin(Duration dt) {
-    final box = Hive.box("session");
-    final String token = box.get("token");
-    final int userId = box.get("user-id");
-
     try {
+      final box = Hive.box("session");
+      final String token = box.get("token");
+      final int userId = box.get("user-id");
       ref.read(authenticationProvider.notifier).loginWithToken(token, userId);
 
       setState(() {

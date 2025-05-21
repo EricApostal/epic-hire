@@ -10,10 +10,10 @@ class Conversations extends _$Conversations {
 
   @override
   Future<List<Conversation>?> build() async {
-    final _auth = ref.watch(authenticationProvider).valueOrNull;
-    if (_auth == null) return null;
+    final auth = ref.watch(authenticationProvider).valueOrNull;
+    if (auth == null) return null;
 
-    client = _auth;
+    client = auth;
 
     return await client!.conversations.fetchConversationPages(0, 10);
   }

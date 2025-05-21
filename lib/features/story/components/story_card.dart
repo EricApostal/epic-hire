@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:epic_hire/shared/components/image/fade_in.dart';
 import 'package:epic_hire/shared/utils/network_key.dart';
-import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wrapper/wrapper.dart';
