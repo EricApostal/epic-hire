@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:epic_hire/features/authentication/models/authenticated_user.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 import 'package:wrapper/wrapper.dart';
@@ -15,7 +16,11 @@ class Authentication extends _$Authentication {
     return null;
   }
 
-  Future<WrapperRest?> login(String username, String password) async {
+  Future<WrapperRest?> login(
+    String username,
+    String password, {
+    bool persist = false,
+  }) async {
     final Uri loginUri = Uri.parse("https://api.epichire.com/v2/auth/login");
     final deviceId = Uuid().v1();
 
@@ -50,13 +55,27 @@ class Authentication extends _$Authentication {
       companyPageIds: body["companyPageIds"],
       accountStatus: body["accountStatus"],
     );
+
+    final client = await loginWithToken(user.token, user.id);
+
+    if (persist) {
+      final box = Hive.box("session");
+      box.put("token", user.token);
+      box.put("user-id", user.id);
+    }
+
+    return client;
+  }
+
+  Future<WrapperRest> loginWithToken(String token, int userId) async {
     final client = await Wrapper.connectRest(
-      userId: user.id,
-      token: "Bearer ${user.token}",
+      userId: userId,
+      token: "Bearer $token",
       options: RestClientOptions(),
     );
 
     state = AsyncValue.data(client);
+
     return client;
   }
 

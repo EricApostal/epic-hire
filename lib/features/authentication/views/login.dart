@@ -1,11 +1,11 @@
 import 'package:chiclet/chiclet.dart';
 import 'package:epic_hire/features/authentication/components/login_box.dart';
 import 'package:epic_hire/features/authentication/repositories/login.dart';
-import 'package:epic_hire/shared/components/buttons/styled_text_button.dart';
+import 'package:epic_hire/shared/utils/platform.dart';
 import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -19,21 +19,18 @@ class LoginScreen extends ConsumerStatefulWidget {
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  bool hidePassword = true;
+
   @override
   Widget build(BuildContext context) {
     final theme = EpicHireTheme.of(context);
-    return ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: 0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: EpicHireTheme.of(context).background,
-          // gradient: LinearGradient(
-          //   begin: Alignment.bottomCenter,
-          //   end: Alignment.topCenter,
-          //   colors: [Color(0xFF128FFF), Color.fromARGB(255, 127, 110, 255)],
-          // ),
-        ),
-        child: Center(
+    return Container(
+      decoration: BoxDecoration(color: EpicHireTheme.of(context).background),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: shouldUseDesktopLayout(context)
+              ? BoxConstraints(maxWidth: 400)
+              : BoxConstraints(),
           child: Form(
             child: Padding(
               padding: EdgeInsets.fromLTRB(
@@ -46,11 +43,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // SvgPicture.asset(
-                  //   "assets/icons/epic-hire-banner.svg",
-                  //   height: 90,
-                  // ),
-                  // const SizedBox(height: 20),
                   Align(
                     alignment: Alignment.topCenter,
                     child: Padding(
@@ -67,9 +59,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   color: Colors.white,
                                 ),
                           ),
+                          const SizedBox(height: 15),
                           Text(
                             "We're happy to have you back!",
-                            style: Theme.of(context).textTheme.bodyMedium!
+                            style: Theme.of(context).textTheme.headlineSmall!
                                 .copyWith(
                                   fontFamily: GoogleFonts.outfit().fontFamily,
                                   fontWeight: FontWeight.w900,
@@ -78,11 +71,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           ),
 
                           const SizedBox(height: 30),
-                          // Text(
-                          //   "We're happy to have you back!",
-                          //   style: Theme.of(context).textTheme.labelLarge,
-                          // ),
-                          // const SizedBox(height: 20),
                         ],
                       ),
                     ),
@@ -110,28 +98,53 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           color: theme.gray,
                         ),
                         // const SizedBox(height: 12),
-                        LoginBox(
-                          hintText: "Password",
-                          controller: passwordController,
-                          autofillHints: ["password"],
-                          obscureText: true,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(18),
-                            bottomRight: Radius.circular(18),
-                          ),
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            LoginBox(
+                              hintText: "Password",
+                              controller: passwordController,
+                              autofillHints: ["password"],
+                              obscureText: hidePassword,
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(18),
+                                bottomRight: Radius.circular(18),
+                              ),
+                            ),
+                            Positioned(
+                              right: 0,
+                              child: IconButton(
+                                color: theme.gray,
+                                onPressed: () {
+                                  setState(() {
+                                    hidePassword = !hidePassword;
+                                  });
+                                },
+                                icon: Icon(
+                                  hidePassword
+                                      ? Icons.visibility_rounded
+                                      : Icons.visibility_off,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
-                  Spacer(),
+                  (shouldUseMobileLayout(context))
+                      ? Spacer()
+                      : const SizedBox(height: 48),
                   ChicletOutlinedAnimatedButton(
                     width: double.infinity,
                     onPressed: () async {
+                      HapticFeedback.mediumImpact();
                       final _ = await ref
                           .read(authenticationProvider.notifier)
                           .login(
                             usernameController.text,
                             passwordController.text,
+                            persist: true,
                           );
                       GoRouter.of(context).go("/messages");
                     },
@@ -152,6 +165,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ChicletOutlinedAnimatedButton(
                     width: double.infinity,
                     onPressed: () async {
+                      HapticFeedback.lightImpact();
                       await ref
                           .read(authenticationProvider.notifier)
                           .loginAsGuest();
@@ -160,7 +174,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     backgroundColor: theme.dirtyWhite,
                     borderColor: theme.dirtyWhite.withValues(alpha: 0.7),
                     child: Text(
-                      "Continue as Guest",
+                      "Forgot Password",
                       style: Theme.of(
                         context,
                       ).textTheme.labelLarge!.copyWith(color: theme.background),

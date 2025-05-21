@@ -1,3 +1,4 @@
+import 'package:epic_hire/features/authentication/utils/hive.dart';
 import 'package:epic_hire/features/router/controller.dart';
 import 'package:epic_hire/theme/themes/dark.dart';
 import 'package:epic_hire/theme/themes/light.dart';
@@ -5,13 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.edgeToEdge,
     overlays: [SystemUiOverlay.top],
   );
+
+  await setupHive();
+
   runApp(ProviderScope(child: const MainApp()));
 }
 

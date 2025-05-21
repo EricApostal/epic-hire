@@ -9,6 +9,7 @@ TextTheme getBaseTextTheme(BuildContext context) {
       .copyWith(
         labelLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
         labelMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+        headlineSmall: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
       );
 }
 

@@ -1,7 +1,9 @@
+import 'package:epic_hire/features/authentication/views/landing.dart';
+import 'package:epic_hire/features/authentication/views/loading.dart';
 import 'package:epic_hire/features/authentication/views/login.dart';
+import 'package:epic_hire/features/authentication/views/register.dart';
 import 'package:epic_hire/features/company/views/summary_view.dart';
 import 'package:epic_hire/features/events/views/events.dart';
-import 'package:epic_hire/features/home/views/home.dart';
 import 'package:epic_hire/features/home/views/navigation_frame.dart';
 import 'package:epic_hire/features/jobs/views/jobs.dart';
 import 'package:epic_hire/features/messaging/views/direct_messages.dart';
@@ -13,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final routerController = GoRouter(
-  initialLocation: '/login',
+  initialLocation: '/loading',
   routes: [
     ShellRoute(
       builder: (context, state, child) => Scaffold(
@@ -21,8 +23,25 @@ final routerController = GoRouter(
         backgroundColor: EpicHireTheme.of(context).background,
       ),
       routes: [
-        GoRoute(path: '/', redirect: (_, __) => '/login'),
-        GoRoute(path: '/login', builder: (context, state) => LoginScreen()),
+        GoRoute(path: '/', redirect: (_, __) => '/loading'),
+        GoRoute(
+          path: "/loading",
+          builder: (context, state) => StartupLoadingScreen(),
+        ),
+        GoRoute(
+          path: '/login',
+          builder: (context, state) => LandingScreen(),
+          routes: [
+            GoRoute(
+              path: '/existing',
+              builder: (context, state) => LoginScreen(),
+            ),
+            GoRoute(
+              path: '/register',
+              builder: (context, state) => RegisterScreen(),
+            ),
+          ],
+        ),
         GoRoute(
           path: '/profile/:userId/stories',
           builder: (context, state) {
