@@ -1,3 +1,5 @@
+import 'package:epic_hire/features/messaging/components/app_search_bar.dart';
+import 'package:epic_hire/features/messaging/components/conversation_card.dart';
 import 'package:epic_hire/features/messaging/components/user_presence_card.dart';
 import 'package:epic_hire/features/messaging/repositories/conversations.dart';
 import 'package:epic_hire/theme/theme.dart';
@@ -16,38 +18,73 @@ class DirectMessagesScreen extends ConsumerStatefulWidget {
 class _DirectMessagesScreenState extends ConsumerState<DirectMessagesScreen> {
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          floating: true,
-          pinned: true,
-          automaticallyImplyLeading: false,
-          expandedHeight: 100,
-          flexibleSpace: const FlexibleSpaceBar(background: _AppBar()),
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(70),
-            child: Padding(
-              padding: const EdgeInsets.all(18),
-              child: Row(
-                children: [
-                  SvgPicture.asset(
-                    "assets/icons/epic-hire-banner.svg",
-                    height: 30,
-                  ),
-                ],
+    final conversations = ref.watch(conversationsProvider).valueOrNull;
+    final theme = Theme.of(context);
+    final colorTheme = EpicHireTheme.of(context);
+
+    if (conversations == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    return Scaffold(
+      backgroundColor: colorTheme.background,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {},
+        child: Icon(Icons.add_rounded, color: colorTheme.dirtyWhite),
+      ),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            floating: true,
+            pinned: true,
+            automaticallyImplyLeading: false,
+            expandedHeight: 110,
+            flexibleSpace: const FlexibleSpaceBar(background: _AppBar()),
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(70),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 8,
+                  right: 8,
+                  top: 0,
+                  bottom: 8,
+                ),
+                child: AppSearchBar(),
               ),
             ),
           ),
-        ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            if (index == 0) {
-              return SizedBox(height: 100, child: _HorizontalRecents());
-            }
-            return Card(child: Text("Temporary Card"));
-          }),
-        ),
-      ],
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              childCount: conversations.length + 1,
+              (context, index) {
+                if (index == 0) {
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                      left: 18,
+                      right: 18,
+                      top: 18,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 100, child: _HorizontalRecents()),
+                        SizedBox(height: 8),
+                        Text("Messages", style: theme.textTheme.labelLarge),
+                      ],
+                    ),
+                  );
+                }
+                return Padding(
+                  padding: const EdgeInsets.only(left: 8, right: 8, bottom: 2),
+                  child: ConversationCard(
+                    conversation: conversations[index - 1],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -65,11 +102,14 @@ class __AppBarState extends ConsumerState<_AppBar> {
     final theme = EpicHireTheme.of(context);
     return Container(
       decoration: BoxDecoration(color: theme.foreground),
-      child: const Align(
+      child: Align(
         alignment: Alignment.centerLeft,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Text("Funny top bar", style: TextStyle(fontSize: 24)),
+          child: SvgPicture.asset(
+            "assets/icons/epic-hire-banner.svg",
+            height: 30,
+          ),
         ),
       ),
     );
