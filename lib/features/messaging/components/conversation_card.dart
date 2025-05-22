@@ -5,6 +5,7 @@ import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wrapper/wrapper.dart';
 
 class ConversationCard extends ConsumerStatefulWidget {
@@ -47,7 +48,10 @@ class _ConversationCardState extends ConsumerState<ConversationCard> {
           // change hover / select color to white
           foregroundColor: theme.foreground,
         ),
-        onPressed: () => {HapticFeedback.lightImpact()},
+        onPressed: () {
+          HapticFeedback.lightImpact();
+          context.go("/messages/${widget.conversation.id.value}");
+        },
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Row(
@@ -99,8 +103,7 @@ class _ConversationIconState extends ConsumerState<_ConversationIcon> {
     ConversationMember iconToUse = widget.conversation.members.firstWhere((
       member,
     ) {
-      print("${member.id} - ${auth!.user!.id.value}");
-      return member.relatedEntityId != auth.user!.id.value;
+      return member.relatedEntityId != auth!.user!.id.value;
     });
 
     return ClipRRect(

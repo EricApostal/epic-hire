@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:epic_hire/shared/utils/network_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,8 +17,8 @@ class _UserPresenceIconState extends ConsumerState<UserPresenceIcon> {
   @override
   Widget build(BuildContext context) {
     return ClipOval(
-      child: Image.network(
-        getUrlFromImageKey(
+      child: CachedNetworkImage(
+        imageUrl: getUrlFromImageKey(
           widget.conversation.members.first.imageKey,
           width: 256,
         ),
