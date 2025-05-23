@@ -4,7 +4,8 @@ import 'package:epic_hire/theme/themes/dark.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+import 'package:epic_hire/shared/utils/web/web_utils.dart'
+    if (dart.library.io) 'package:epic_hire/shared/utils/web/non_web_utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,7 +15,7 @@ void main() async {
     overlays: [SystemUiOverlay.top],
   );
 
-  setUrlStrategy(PathUrlStrategy());
+  initializePlatform();
 
   await setupHive();
 
