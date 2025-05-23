@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:epic_hire/features/authentication/repositories/login.dart';
+import 'package:epic_hire/shared/components/navigation/overlapping_panels.dart';
 import 'package:epic_hire/shared/utils/network_key.dart';
 import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,7 @@ class _ConversationCardState extends ConsumerState<ConversationCard> {
         ),
         onPressed: () {
           HapticFeedback.lightImpact();
+          OverlappingPanels.of(context)!.moveToState(RevealSide.main);
           context.go("/messages/${widget.conversation.id.value}");
         },
         child: Padding(

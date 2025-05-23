@@ -72,10 +72,7 @@ final routerController = GoRouter(
           },
         ),
         ShellRoute(
-          builder: (context, state, child) => NavigationFrame(
-            showNavbar: _shouldShowNavigation(context, state),
-            child: child,
-          ),
+          builder: (context, state, child) => NavigationFrame(child: child),
           routes: [
             GoRoute(
               path: "/messages",
@@ -93,9 +90,10 @@ final routerController = GoRouter(
                     );
                     return NoTransitionPage<void>(
                       key: state.pageKey,
-                      child: shouldUseMobileLayout(context)
-                          ? MessageListScreen(conversationId: id!)
-                          : MessageOverviewScreen(conversationId: id),
+                      child: MessageOverviewScreen(conversationId: id),
+                      // child: shouldUseMobileLayout(context)
+                      //     ? MessageListScreen(conversationId: id!)
+                      //     : MessageOverviewScreen(conversationId: id),
                     );
                   },
                 ),

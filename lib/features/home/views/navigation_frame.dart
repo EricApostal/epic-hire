@@ -6,12 +6,7 @@ import 'package:go_router/go_router.dart';
 
 class NavigationFrame extends ConsumerStatefulWidget {
   final Widget child;
-  final bool showNavbar;
-  const NavigationFrame({
-    super.key,
-    required this.child,
-    this.showNavbar = true,
-  });
+  const NavigationFrame({super.key, required this.child});
 
   @override
   ConsumerState<NavigationFrame> createState() => NavigationFrameState();
@@ -19,6 +14,7 @@ class NavigationFrame extends ConsumerStatefulWidget {
 
 class NavigationFrameState extends ConsumerState<NavigationFrame> {
   final routes = ["messages", "events", "search", "work"];
+  bool showNavbar = true;
 
   int _selectedIndex = 0;
 
@@ -33,6 +29,8 @@ class NavigationFrameState extends ConsumerState<NavigationFrame> {
     });
     super.initState();
   }
+
+  setShowNavbar(bool showNavbar) {}
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +56,7 @@ class NavigationFrameState extends ConsumerState<NavigationFrame> {
         backgroundColor: theme.background,
         body: Row(
           children: [
-            if (widget.showNavbar)
+            if (showNavbar)
               NavigationRail(
                 backgroundColor: theme.background,
                 selectedIndex: _selectedIndex,
@@ -89,7 +87,7 @@ class NavigationFrameState extends ConsumerState<NavigationFrame> {
       return Scaffold(
         backgroundColor: EpicHireTheme.of(context).background,
         body: widget.child,
-        bottomNavigationBar: (widget.showNavbar)
+        bottomNavigationBar: (showNavbar)
             ? Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

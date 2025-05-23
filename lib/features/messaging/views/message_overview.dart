@@ -1,5 +1,6 @@
 import 'package:epic_hire/features/messaging/views/direct_messages.dart';
 import 'package:epic_hire/features/messaging/views/message_list.dart';
+import 'package:epic_hire/shared/components/navigation/overlapping_panels.dart';
 import 'package:epic_hire/shared/utils/platform.dart';
 import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,16 @@ class MessageOverviewScreen extends ConsumerStatefulWidget {
 class _MessageOverviewScreenState extends ConsumerState<MessageOverviewScreen> {
   @override
   Widget build(BuildContext context) {
-    if (shouldUseMobileLayout(context)) return DirectMessagesScreen();
+    if (shouldUseMobileLayout(context)) {
+      return OverlappingPanels(
+        restWidth: 0,
+        left: DirectMessagesScreen(),
+        isMainSwipeable: (widget.conversationId != null),
+        main: (widget.conversationId != null)
+            ? MessageListScreen(conversationId: widget.conversationId!)
+            : Container(),
+      );
+    }
 
     return Row(
       children: [
