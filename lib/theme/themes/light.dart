@@ -4,8 +4,9 @@ import 'package:epic_hire/theme/themes/base.dart';
 import 'package:flutter/material.dart';
 
 ThemeData getLightTheme(BuildContext context) {
-  return ThemeData.from(colorScheme: ColorScheme.light()).copyWith(
-    textTheme: getBaseTextTheme(context).apply(),
+  final colorScheme = ColorScheme.light();
+  return ThemeData.from(colorScheme: colorScheme).copyWith(
+    textTheme: getBaseTextTheme(colorScheme).apply(),
     extensions: [
       const EpicHireTheme(
         foreground: AppColorsLight.foreground,

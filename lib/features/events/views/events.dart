@@ -1,4 +1,3 @@
-import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class EventScreen extends StatefulWidget {

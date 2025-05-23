@@ -6,12 +6,10 @@ import 'package:epic_hire/features/company/views/summary_view.dart';
 import 'package:epic_hire/features/events/views/events.dart';
 import 'package:epic_hire/features/home/views/navigation_frame.dart';
 import 'package:epic_hire/features/jobs/views/jobs.dart';
-import 'package:epic_hire/features/messaging/views/message_list.dart';
 import 'package:epic_hire/features/messaging/views/message_overview.dart';
 import 'package:epic_hire/features/search/screens/search_screen.dart';
 import 'package:epic_hire/features/story/components/story_slider.dart';
 import 'package:epic_hire/features/user/views/profile.dart';
-import 'package:epic_hire/shared/utils/platform.dart';
 import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -162,14 +160,6 @@ final routerController = GoRouter(
     ),
   ],
 );
-
-bool _shouldShowNavigation(BuildContext context, GoRouterState state) {
-  if (shouldUseMobileLayout(context)) {
-    return !(state.matchedLocation.startsWith('/messages/') &&
-        state.pathParameters["conversation_id"] != null);
-  }
-  return true;
-}
 
 class NoTransitionPage<T> extends CustomTransitionPage<T> {
   NoTransitionPage({required super.child, super.key})

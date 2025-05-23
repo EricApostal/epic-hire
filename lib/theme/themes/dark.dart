@@ -7,10 +7,9 @@ import 'package:universal_platform/universal_platform.dart';
 bool useAmoled = false;
 
 ThemeData getDarkTheme(BuildContext context) {
-  return ThemeData.from(
-    colorScheme: ColorScheme.dark(primary: AppColorsAmoled.blue),
-  ).copyWith(
-    textTheme: getBaseTextTheme(context),
+  final colorScheme = ColorScheme.dark(primary: AppColorsAmoled.blue);
+  return ThemeData.from(colorScheme: colorScheme).copyWith(
+    textTheme: getBaseTextTheme(colorScheme),
     scaffoldBackgroundColor: (UniversalPlatform.isMobile && useAmoled)
         ? AppColorsAmoled.background
         : AppColorsDark.background,

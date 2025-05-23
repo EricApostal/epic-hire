@@ -1,10 +1,10 @@
 import 'package:epic_hire/features/authentication/utils/hive.dart';
 import 'package:epic_hire/features/router/controller.dart';
 import 'package:epic_hire/theme/themes/dark.dart';
-import 'package:epic_hire/theme/themes/light.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +13,8 @@ void main() async {
     SystemUiMode.edgeToEdge,
     overlays: [SystemUiOverlay.top],
   );
+
+  setUrlStrategy(PathUrlStrategy());
 
   await setupHive();
 
