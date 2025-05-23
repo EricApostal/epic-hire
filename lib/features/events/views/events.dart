@@ -1,3 +1,4 @@
+import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class EventScreen extends StatefulWidget {
@@ -10,6 +11,7 @@ class EventScreen extends StatefulWidget {
 class _EventScreenState extends State<EventScreen> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: const Text("EVENTS!!"));
+    // final colorTheme = EpicHireTheme.of(context);
+    return Scaffold(body: Center(child: const Text("EVENTS!!")));
   }
 }

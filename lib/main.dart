@@ -42,7 +42,7 @@ class _MainAppState extends ConsumerState<MainApp> {
     return MaterialApp.router(
       title: 'EpicHire',
       themeMode: ThemeMode.dark,
-      theme: getLightTheme(context),
+      theme: getDarkTheme(context),
       darkTheme: getDarkTheme(context),
       routerConfig: routerController,
     );

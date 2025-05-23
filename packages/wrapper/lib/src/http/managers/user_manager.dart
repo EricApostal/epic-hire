@@ -47,7 +47,7 @@ class UserManager extends ReadOnlyManager<User> {
       userBadges: raw["userBadges"] as List<dynamic>,
       more: raw["more"] as List<dynamic>,
       risingStar: raw["risingStar"] as bool,
-      resumeKey: raw["resumeKey"] as String,
+      resumeKey: raw["resumeKey"] as String?,
     );
   }
 

@@ -100,12 +100,13 @@ class __AppBarState extends ConsumerState<_AppBar> {
   @override
   Widget build(BuildContext context) {
     final theme = EpicHireTheme.of(context);
+    final padding = MediaQuery.paddingOf(context);
     return Container(
       decoration: BoxDecoration(color: theme.foreground),
       child: Align(
-        alignment: Alignment.centerLeft,
+        alignment: Alignment.topLeft,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.only(left: 16, right: 16, top: 10 + padding.top),
           child: SvgPicture.asset(
             "assets/icons/epic-hire-banner.svg",
             height: 30,

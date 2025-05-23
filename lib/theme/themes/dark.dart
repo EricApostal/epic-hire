@@ -11,6 +11,9 @@ ThemeData getDarkTheme(BuildContext context) {
     colorScheme: ColorScheme.dark(primary: AppColorsAmoled.blue),
   ).copyWith(
     textTheme: getBaseTextTheme(context),
+    scaffoldBackgroundColor: (UniversalPlatform.isMobile && useAmoled)
+        ? AppColorsAmoled.background
+        : AppColorsDark.background,
 
     extensions: [
       (UniversalPlatform.isMobile && useAmoled)

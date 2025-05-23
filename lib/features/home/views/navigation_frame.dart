@@ -1,3 +1,4 @@
+import 'package:epic_hire/shared/utils/platform.dart';
 import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,51 +34,27 @@ class NavigationFrameState extends ConsumerState<NavigationFrame> {
     final theme = EpicHireTheme.of(context);
     final textTheme = Theme.of(context).textTheme;
 
-    // chat, events, search, jobs
-    final destinations = [
+    final navigationBarDestinations = [
       NavigationDestination(icon: Icon(Icons.message_rounded), label: "Chat"),
       NavigationDestination(icon: Icon(Icons.event), label: "Events"),
       NavigationDestination(icon: Icon(Icons.search), label: "Search"),
       NavigationDestination(icon: Icon(Icons.work), label: "Jobs"),
     ];
 
-    return Scaffold(
-      backgroundColor: EpicHireTheme.of(context).background,
+    if (shouldUseDesktopLayout(context)) {
+      final navigationRailDestinations = navigationBarDestinations.map((dest) {
+        return NavigationRailDestination(
+          icon: dest.icon,
+          label: Text(dest.label),
+        );
+      }).toList();
 
-      body: widget.child,
-
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-
-        children: [
-          Divider(height: 1, thickness: 2, color: theme.foreground),
-          NavigationBarTheme(
-            data: NavigationBarThemeData(
-              iconTheme: WidgetStateProperty.resolveWith<IconThemeData?>((
-                states,
-              ) {
-                if (states.contains(WidgetState.selected)) {
-                  return IconThemeData(color: theme.dirtyWhite);
-                }
-                return IconThemeData(color: theme.gray);
-              }),
-
-              labelTextStyle: WidgetStateProperty.resolveWith<TextStyle?>((
-                states,
-              ) {
-                if (states.contains(WidgetState.selected)) {
-                  return textTheme.labelMedium!.copyWith(
-                    color: theme.dirtyWhite,
-                  );
-                }
-                return textTheme.labelMedium!.copyWith(color: theme.gray);
-              }),
-            ),
-            child: NavigationBar(
+      return Scaffold(
+        backgroundColor: theme.background,
+        body: Row(
+          children: [
+            NavigationRail(
               backgroundColor: theme.background,
-              destinations: destinations,
-              indicatorColor: theme.blue.withValues(alpha: 0.6),
-
               selectedIndex: _selectedIndex,
               onDestinationSelected: (value) {
                 context.go("/${routes[value]}");
@@ -85,10 +62,68 @@ class NavigationFrameState extends ConsumerState<NavigationFrame> {
                   _selectedIndex = value;
                 });
               },
+              destinations: navigationRailDestinations,
+              labelType: NavigationRailLabelType.all,
+              indicatorColor: theme.blue.withValues(alpha: 0.6),
+              selectedIconTheme: IconThemeData(color: theme.dirtyWhite),
+              unselectedIconTheme: IconThemeData(color: theme.gray),
+              selectedLabelTextStyle: textTheme.labelMedium!.copyWith(
+                color: theme.dirtyWhite,
+              ),
+              unselectedLabelTextStyle: textTheme.labelMedium!.copyWith(
+                color: theme.gray,
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+            VerticalDivider(thickness: 1, width: 1, color: theme.foreground),
+            Expanded(child: widget.child),
+          ],
+        ),
+      );
+    } else {
+      return Scaffold(
+        backgroundColor: EpicHireTheme.of(context).background,
+        body: widget.child,
+        bottomNavigationBar: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Divider(height: 1, thickness: 2, color: theme.foreground),
+            NavigationBarTheme(
+              data: NavigationBarThemeData(
+                iconTheme: WidgetStateProperty.resolveWith<IconThemeData?>((
+                  states,
+                ) {
+                  if (states.contains(WidgetState.selected)) {
+                    return IconThemeData(color: theme.dirtyWhite);
+                  }
+                  return IconThemeData(color: theme.gray);
+                }),
+                labelTextStyle: WidgetStateProperty.resolveWith<TextStyle?>((
+                  states,
+                ) {
+                  if (states.contains(WidgetState.selected)) {
+                    return textTheme.labelMedium!.copyWith(
+                      color: theme.dirtyWhite,
+                    );
+                  }
+                  return textTheme.labelMedium!.copyWith(color: theme.gray);
+                }),
+              ),
+              child: NavigationBar(
+                backgroundColor: theme.background,
+                destinations: navigationBarDestinations,
+                indicatorColor: theme.blue.withValues(alpha: 0.6),
+                selectedIndex: _selectedIndex,
+                onDestinationSelected: (value) {
+                  context.go("/${routes[value]}");
+                  setState(() {
+                    _selectedIndex = value;
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
 }
