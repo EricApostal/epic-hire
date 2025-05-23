@@ -90,6 +90,8 @@ extension RouteHelpers on HttpRoute {
   void jobBoard() => add(HttpRoutePart("job-board"));
   void homeFeed() => add(HttpRoutePart("home-feed"));
 
-  void conversations() => add(HttpRoutePart("conversations"));
+  void conversations({String? id}) =>
+      add(HttpRoutePart("conversations", [if (id != null) HttpRouteParam(id)]));
   void conversationsWith() => add(HttpRoutePart("conversations-with"));
+  void messages() => add(HttpRoutePart("messages"));
 }

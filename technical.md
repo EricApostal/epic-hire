@@ -9,3 +9,5 @@ There's a lot of managers that don't implement fetch and indexing (a requirement
 The `Identified` objects are super dumb. Every day I think that we just need to go back down to an `int` and completely rid of identified. This structure should return if we were to use snowflakes.
 
 The way theming works is kinda dumb. There is Theme.of(context), and EpicHireTheme.of(context), and both are needed (Theme for TextTheme, EpicHireTheme for colors). I should find a better way of doing that.
+
+For the `Manager`s in the `Wrapper` library, I think I want to make any entity that's fetchable a manager. Right now I have quite a few objects associated with others that should be fetchable on their own, but are not. (ie: in Discord you'd have a channel manager which fetches a list of messages, then message manager which handles each independently). For the sake of Talos, a good start to this would probably be a `ConversationMember`. Are they fetchable independently? How does it inherit? Etc. Just something to look out for to avoid spaghetti.

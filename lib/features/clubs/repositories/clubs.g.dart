@@ -6,7 +6,7 @@ part of 'clubs.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$clubsHash() => r'4491c5aa36cd45e16036201d94e120042e7ad793';
+String _$clubsHash() => r'3e5330e4b53da3cc94737ae937ce4f5796a40a89';
 
 /// See also [Clubs].
 @ProviderFor(Clubs)

@@ -1,7 +1,7 @@
 /// A member of a [Conversation]
 class ConversationMember {
   final int id;
-  final ConversationMemberType memberType;
+  final ConversationMemberType? memberType;
   final int relatedEntityId;
   final String displayName;
   final String imageKey;
@@ -9,7 +9,7 @@ class ConversationMember {
 
   ConversationMember({
     required this.id,
-    required this.memberType,
+    this.memberType,
     required this.relatedEntityId,
     required this.displayName,
     required this.imageKey,

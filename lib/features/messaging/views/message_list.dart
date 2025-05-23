@@ -1,6 +1,9 @@
+import 'package:epic_hire/features/messaging/components/message_box.dart';
+import 'package:epic_hire/features/messaging/repositories/messages.dart';
 import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wrapper/wrapper.dart';
 
 class MessageListScreen extends ConsumerStatefulWidget {
   final int conversationId;
@@ -13,10 +16,32 @@ class MessageListScreen extends ConsumerStatefulWidget {
 
 class _MessageListScreenState extends ConsumerState<MessageListScreen> {
   @override
+  void initState() {
+    // ref.listenManual(
+    //   messagesProvider(Identified.parse(widget.conversationId)),
+    //   (a, b) {
+    //     print(a);
+    //   },
+    // );
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final messages =
+        ref
+            .watch(messagesProvider(Identified.parse(widget.conversationId)))
+            .valueOrNull ??
+        [];
+
     return Scaffold(
       backgroundColor: EpicHireTheme.of(context).background,
-      body: Center(child: Text(widget.conversationId.toString())),
+      body: ListView.builder(
+        itemCount: messages.length,
+        itemBuilder: (context, index) {
+          return MessageBox(messages[index]);
+        },
+      ),
     );
   }
 }

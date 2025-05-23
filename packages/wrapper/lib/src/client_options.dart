@@ -1,6 +1,7 @@
 import 'package:wrapper/src/cache/cache.dart';
 import 'package:wrapper/src/models/club/club.dart';
 import 'package:wrapper/src/models/conversation/conversation.dart';
+import 'package:wrapper/src/models/conversation/message.dart';
 import 'package:wrapper/src/models/job/job.dart';
 import 'package:wrapper/src/models/school/school.dart';
 import 'package:wrapper/src/models/company/company.dart';
@@ -44,8 +45,11 @@ class RestClientOptions extends ClientOptions {
   /// The [CacheConfig] to use for the cache of the [WrapperRest.stories] manager.
   final CacheConfig<Story> storyCacheConfig;
 
-  /// The [CacheConfig] to use for the cache of the [WrapperRest.conversations] manager.
+  /// The [CacheConfig] to use for the cache of the [WrapperRest.conversation] manager.
   final CacheConfig<Conversation> conversationCacheConfig;
+
+  /// The [CacheConfig] to use for the cache of the [WrapperRest.message] manager.
+  final CacheConfig<Message> messageCacheConfig;
 
   /// Create a new [RestClientOptions].
   const RestClientOptions({
@@ -58,6 +62,7 @@ class RestClientOptions extends ClientOptions {
     this.jobCacheConfig = const CacheConfig(),
     this.storyCacheConfig = const CacheConfig(),
     this.conversationCacheConfig = const CacheConfig(),
+    this.messageCacheConfig = const CacheConfig(),
   });
 }
 

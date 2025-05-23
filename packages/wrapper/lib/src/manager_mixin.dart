@@ -3,6 +3,7 @@ import 'package:wrapper/src/client_options.dart';
 import 'package:wrapper/src/http/managers/club_manager.dart';
 import 'package:wrapper/src/http/managers/conversation_manager.dart';
 import 'package:wrapper/src/http/managers/job_manager.dart';
+import 'package:wrapper/src/http/managers/message_manager.dart';
 import 'package:wrapper/src/http/managers/school_manager.dart';
 import 'package:wrapper/src/http/managers/company_manager.dart';
 import 'package:wrapper/src/http/managers/story_manager.dart';
