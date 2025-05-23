@@ -51,7 +51,7 @@ class _ConversationCardState extends ConsumerState<ConversationCard> {
         ),
         onPressed: () {
           HapticFeedback.lightImpact();
-          OverlappingPanels.of(context)!.moveToState(RevealSide.main);
+          OverlappingPanels.of(context)?.moveToState(RevealSide.main);
           context.go("/messages/${widget.conversation.id.value}");
         },
         child: Padding(

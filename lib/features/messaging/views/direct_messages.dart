@@ -2,6 +2,8 @@ import 'package:epic_hire/features/messaging/components/app_search_bar.dart';
 import 'package:epic_hire/features/messaging/components/conversation_card.dart';
 import 'package:epic_hire/features/messaging/components/user_presence_card.dart';
 import 'package:epic_hire/features/messaging/repositories/conversations.dart';
+import 'package:epic_hire/shared/components/navigation/navbar.dart';
+import 'package:epic_hire/shared/utils/platform.dart';
 import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,56 +34,75 @@ class _DirectMessagesScreenState extends ConsumerState<DirectMessagesScreen> {
         onPressed: () => {},
         child: Icon(Icons.add_rounded, color: colorTheme.dirtyWhite),
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            floating: true,
-            pinned: true,
-            automaticallyImplyLeading: false,
-            expandedHeight: 110,
+      bottomNavigationBar: (shouldUseMobileLayout(context))
+          ? DynamicNavigationBar()
+          : null,
+      body: Column(
+        children: [
+          Expanded(
+            child: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  floating: true,
+                  pinned: true,
+                  automaticallyImplyLeading: false,
+                  expandedHeight: 110,
 
-            flexibleSpace: const FlexibleSpaceBar(background: _AppBar()),
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(70),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 8,
-                  right: 8,
-                  top: 0,
-                  bottom: 8,
-                ),
-                child: AppSearchBar(),
-              ),
-            ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              childCount: conversations.length + 1,
-              (context, index) {
-                if (index == 0) {
-                  return Padding(
-                    padding: const EdgeInsets.only(
-                      left: 18,
-                      right: 18,
-                      top: 18,
+                  flexibleSpace: const FlexibleSpaceBar(background: _AppBar()),
+                  bottom: PreferredSize(
+                    preferredSize: Size.fromHeight(70),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 8,
+                        right: 8,
+                        top: 0,
+                        bottom: 8,
+                      ),
+                      child: AppSearchBar(),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 100, child: _HorizontalRecents()),
-                        SizedBox(height: 8),
-                        Text("Messages", style: theme.textTheme.labelLarge),
-                      ],
-                    ),
-                  );
-                }
-                return Padding(
-                  padding: const EdgeInsets.only(left: 8, right: 8, bottom: 2),
-                  child: ConversationCard(
-                    conversation: conversations[index - 1],
                   ),
-                );
-              },
+                ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    childCount: conversations.length + 1,
+                    (context, index) {
+                      if (index == 0) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                            left: 18,
+                            right: 18,
+                            top: 18,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 100,
+                                child: _HorizontalRecents(),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                "Messages",
+                                style: theme.textTheme.labelLarge,
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                          left: 8,
+                          right: 8,
+                          bottom: 2,
+                        ),
+                        child: ConversationCard(
+                          conversation: conversations[index - 1],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
         ],
