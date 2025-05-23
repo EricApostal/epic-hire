@@ -83,6 +83,7 @@ final routerController = GoRouter(
                 key: state.pageKey,
                 child: MessageOverviewScreen(),
               ),
+
               routes: [
                 GoRoute(
                   path: ':conversation_id',
@@ -166,7 +167,8 @@ final routerController = GoRouter(
 
 bool _shouldShowNavigation(BuildContext context, GoRouterState state) {
   if (shouldUseMobileLayout(context)) {
-    return !state.matchedLocation.startsWith('/messages/');
+    return !(state.matchedLocation.startsWith('/messages/') &&
+        state.pathParameters["conversation_id"] != null);
   }
   return true;
 }

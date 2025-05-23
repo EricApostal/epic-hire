@@ -31,9 +31,7 @@ class _MessageListScreenState extends ConsumerState<MessageListScreen> {
           Expanded(
             child: ListView.builder(
               // padding: EdgeInsets.only(left: 0, right: 12, top: 12, bottom: 12),
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.paddingOf(context).bottom,
-              ),
+              padding: EdgeInsets.only(bottom: 0),
               reverse: true,
               itemCount: messages.length,
               itemBuilder: (context, index) {
@@ -51,6 +49,14 @@ class _MessageListScreenState extends ConsumerState<MessageListScreen> {
             ),
           ),
           MessageBar(widget.conversationId),
+
+          // Container(
+          //   height: 2,
+          //   decoration: BoxDecoration(
+          //     color: EpicHireTheme.of(context).foreground,
+          //   ),
+          // ),
+          SizedBox(height: MediaQuery.paddingOf(context).bottom),
         ],
       ),
     );

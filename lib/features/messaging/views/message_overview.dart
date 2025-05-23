@@ -21,7 +21,12 @@ class _MessageOverviewScreenState extends ConsumerState<MessageOverviewScreen> {
 
     return Row(
       children: [
-        SizedBox(width: 300, child: DirectMessagesScreen()),
+        MediaQuery.removePadding(
+          context: context,
+          removeLeft: true,
+          removeRight: true,
+          child: SizedBox(width: 300, child: DirectMessagesScreen()),
+        ),
 
         if (widget.conversationId != null)
           Expanded(

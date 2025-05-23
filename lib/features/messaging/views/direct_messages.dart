@@ -39,6 +39,7 @@ class _DirectMessagesScreenState extends ConsumerState<DirectMessagesScreen> {
             pinned: true,
             automaticallyImplyLeading: false,
             expandedHeight: 110,
+
             flexibleSpace: const FlexibleSpaceBar(background: _AppBar()),
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(70),
@@ -136,6 +137,7 @@ class __HorizontalRecentsState extends ConsumerState<_HorizontalRecents> {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: conversations.length,
+      padding: EdgeInsets.only(left: 0),
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(right: 8),
