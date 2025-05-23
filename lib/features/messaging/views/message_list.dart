@@ -37,9 +37,14 @@ class _MessageListScreenState extends ConsumerState<MessageListScreen> {
     return Scaffold(
       backgroundColor: EpicHireTheme.of(context).background,
       body: ListView.builder(
+        padding: EdgeInsets.only(left: 12, right: 12, top: 12, bottom: 12),
+        reverse: true,
         itemCount: messages.length,
         itemBuilder: (context, index) {
-          return MessageBox(messages[index]);
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: MessageBox(messages[index]),
+          );
         },
       ),
     );
