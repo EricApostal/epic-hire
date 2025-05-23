@@ -80,46 +80,65 @@ class _MessageBoxState extends ConsumerState<MessageBox> {
   Widget build(BuildContext context) {
     final colorTheme = EpicHireTheme.of(context);
     final theme = Theme.of(context);
-    return Row(
-      children: [
-        SizedBox(
-          width: 48,
-          height: 48,
-          child: ClipRRect(
-            borderRadius: BorderRadiusGeometry.all(Radius.circular(12)),
-            child: CachedNetworkImage(
-              fit: BoxFit.cover,
-              imageUrl: getUrlFromImageKey(
-                widget.message.sender.imageKey,
-                width: 256,
+    return OutlinedButton(
+      onPressed: () {},
+      style: OutlinedButton.styleFrom(
+        padding: EdgeInsets.zero,
+        backgroundColor: Colors.transparent,
+        minimumSize: Size.zero,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        side: BorderSide.none,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        // change hover / select color to white
+        foregroundColor: colorTheme.foreground,
+      ),
+
+      child: Padding(
+        padding: const EdgeInsets.only(left: 8.0, right: 8, top: 8, bottom: 8),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 48,
+              height: 48,
+              child: ClipRRect(
+                borderRadius: BorderRadiusGeometry.all(Radius.circular(12)),
+                child: CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  imageUrl: getUrlFromImageKey(
+                    widget.message.sender.imageKey,
+                    width: 256,
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-        const SizedBox(width: 8),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.message.sender.displayName,
-                style: theme.textTheme.labelMedium,
-              ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.message.sender.displayName,
+                    style: theme.textTheme.labelMedium,
+                  ),
 
-              MarkdownViewer(
-                widget.message.content!,
-                enableTaskList: true,
-                enableSuperscript: false,
-                enableSubscript: false,
-                enableFootnote: false,
-                enableImageSize: false,
-                enableKbd: false,
-                styleSheet: getMarkdownStyleSheet(context),
+                  MarkdownViewer(
+                    widget.message.content!,
+                    enableTaskList: true,
+                    selectable: false,
+                    enableSuperscript: false,
+                    enableSubscript: false,
+                    enableFootnote: false,
+                    enableImageSize: false,
+                    enableKbd: false,
+                    styleSheet: getMarkdownStyleSheet(context),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

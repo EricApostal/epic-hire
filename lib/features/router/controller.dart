@@ -6,11 +6,12 @@ import 'package:epic_hire/features/company/views/summary_view.dart';
 import 'package:epic_hire/features/events/views/events.dart';
 import 'package:epic_hire/features/home/views/navigation_frame.dart';
 import 'package:epic_hire/features/jobs/views/jobs.dart';
-import 'package:epic_hire/features/messaging/views/direct_messages.dart';
 import 'package:epic_hire/features/messaging/views/message_list.dart';
+import 'package:epic_hire/features/messaging/views/message_overview.dart';
 import 'package:epic_hire/features/search/screens/search_screen.dart';
 import 'package:epic_hire/features/story/components/story_slider.dart';
 import 'package:epic_hire/features/user/views/profile.dart';
+import 'package:epic_hire/shared/utils/platform.dart';
 import 'package:epic_hire/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -27,61 +28,99 @@ final routerController = GoRouter(
         GoRoute(path: '/', redirect: (_, __) => '/loading'),
         GoRoute(
           path: "/loading",
-          builder: (context, state) => StartupLoadingScreen(),
+          pageBuilder: (context, state) => NoTransitionPage<void>(
+            key: state.pageKey,
+            child: StartupLoadingScreen(),
+          ),
         ),
         GoRoute(
           path: '/login',
-          builder: (context, state) => LandingScreen(),
+          pageBuilder: (context, state) => NoTransitionPage<void>(
+            key: state.pageKey,
+            child: LandingScreen(),
+          ),
           routes: [
             GoRoute(
               path: '/existing',
-              builder: (context, state) => LoginScreen(),
+              pageBuilder: (context, state) => NoTransitionPage<void>(
+                key: state.pageKey,
+                child: LoginScreen(),
+              ),
             ),
             GoRoute(
               path: '/register',
-              builder: (context, state) => RegisterScreen(),
+              pageBuilder: (context, state) => NoTransitionPage<void>(
+                key: state.pageKey,
+                child: RegisterScreen(),
+              ),
             ),
           ],
         ),
         GoRoute(
           path: '/profile/:userId/stories',
-          builder: (context, state) {
+          pageBuilder: (context, state) {
             final index = int.tryParse(
               (state.extra as dynamic)!['startingIndex'] as String,
             );
-            return StorySliderScreen(
-              startingIndex: index!,
-              userId: int.parse(state.pathParameters['userId'] as String),
+            return NoTransitionPage<void>(
+              key: state.pageKey,
+              child: StorySliderScreen(
+                startingIndex: index!,
+                userId: int.parse(state.pathParameters['userId'] as String),
+              ),
             );
           },
         ),
         ShellRoute(
-          builder: (context, state, child) => NavigationFrame(child: child),
+          builder: (context, state, child) => NavigationFrame(
+            showNavbar: _shouldShowNavigation(context, state),
+            child: child,
+          ),
           routes: [
             GoRoute(
               path: "/messages",
-              builder: (context, state) => DirectMessagesScreen(),
+              pageBuilder: (context, state) => NoTransitionPage<void>(
+                key: state.pageKey,
+                child: MessageOverviewScreen(),
+              ),
               routes: [
                 GoRoute(
-                  path: ':id',
-                  builder: (context, state) {
+                  path: ':conversation_id',
+                  pageBuilder: (context, state) {
                     final id = int.tryParse(
-                      state.pathParameters["id"] as String,
+                      state.pathParameters["conversation_id"] as String,
                     );
-                    return MessageListScreen(conversationId: id!);
+                    return NoTransitionPage<void>(
+                      key: state.pageKey,
+                      child: shouldUseMobileLayout(context)
+                          ? MessageListScreen(conversationId: id!)
+                          : MessageOverviewScreen(conversationId: id),
+                    );
                   },
                 ),
               ],
             ),
             GoRoute(
               path: "/events",
-              builder: (context, state) => EventScreen(),
+              pageBuilder: (context, state) => NoTransitionPage<void>(
+                key: state.pageKey,
+                child: EventScreen(),
+              ),
             ),
             GoRoute(
               path: "/search",
-              builder: (context, state) => SearchScreen(),
+              pageBuilder: (context, state) => NoTransitionPage<void>(
+                key: state.pageKey,
+                child: SearchScreen(),
+              ),
             ),
-            GoRoute(path: "/work", builder: (context, state) => SearchScreen()),
+            GoRoute(
+              path: "/work",
+              pageBuilder: (context, state) => NoTransitionPage<void>(
+                key: state.pageKey,
+                child: SearchScreen(),
+              ),
+            ),
             GoRoute(
               path: "/companies",
               pageBuilder: (context, state) => NoTransitionPage<void>(
@@ -124,6 +163,13 @@ final routerController = GoRouter(
     ),
   ],
 );
+
+bool _shouldShowNavigation(BuildContext context, GoRouterState state) {
+  if (shouldUseMobileLayout(context)) {
+    return !state.matchedLocation.startsWith('/messages/');
+  }
+  return true;
+}
 
 class NoTransitionPage<T> extends CustomTransitionPage<T> {
   NoTransitionPage({required super.child, super.key})

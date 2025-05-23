@@ -1,3 +1,4 @@
+import 'package:epic_hire/features/messaging/components/message_bar.dart';
 import 'package:epic_hire/features/messaging/components/message_box.dart';
 import 'package:epic_hire/features/messaging/repositories/messages.dart';
 import 'package:epic_hire/theme/theme.dart';
@@ -16,17 +17,6 @@ class MessageListScreen extends ConsumerStatefulWidget {
 
 class _MessageListScreenState extends ConsumerState<MessageListScreen> {
   @override
-  void initState() {
-    // ref.listenManual(
-    //   messagesProvider(Identified.parse(widget.conversationId)),
-    //   (a, b) {
-    //     print(a);
-    //   },
-    // );
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final messages =
         ref
@@ -36,16 +26,32 @@ class _MessageListScreenState extends ConsumerState<MessageListScreen> {
 
     return Scaffold(
       backgroundColor: EpicHireTheme.of(context).background,
-      body: ListView.builder(
-        padding: EdgeInsets.only(left: 12, right: 12, top: 12, bottom: 12),
-        reverse: true,
-        itemCount: messages.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: MessageBox(messages[index]),
-          );
-        },
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              // padding: EdgeInsets.only(left: 0, right: 12, top: 12, bottom: 12),
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.paddingOf(context).bottom,
+              ),
+              reverse: true,
+              itemCount: messages.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 2),
+                  child: MessageBox(messages[index]),
+                );
+              },
+            ),
+          ),
+          Container(
+            height: 2,
+            decoration: BoxDecoration(
+              color: EpicHireTheme.of(context).foreground,
+            ),
+          ),
+          MessageBar(widget.conversationId),
+        ],
       ),
     );
   }
